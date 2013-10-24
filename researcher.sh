@@ -22,7 +22,7 @@ function start_researcher(){
 	quilt push -a -v
 
 	echo "Starting LXC..."
-	lxc-start --name researcher -f researcher_lxc/config -d
+	lxc-start --name researcher -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
 
 	echo "Sleeping 10 seconds until booted..."
 	sleep 10
