@@ -13,6 +13,7 @@ function start_researcher(){
 	fi
 
 	echo "Unpacking..."
+	rm -r researcher/researcher_lxc
 	tar -C researcher --numeric-owner -xJf $RESEARCH_CONTAINER
 
 	cd researcher
