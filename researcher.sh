@@ -31,4 +31,6 @@ function start_researcher(){
 
 	echo "Pinging..."
 	ping6 -c 1 fdf6:1e51:5f7b:b50c::3 && echo "ok"
+	
+	cd ..
 }
