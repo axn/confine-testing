@@ -6,9 +6,9 @@ function start_researcher(){
 	SLEEP=20
 	
 	# fetch/copy the latest research container
-	# if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
-	# 	wget --no-check-certificate $RESEARCH_CONTAINER_URL -O dl/$RESEARCH_CONTAINER
-	# fi
+	if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
+		wget --no-check-certificate $RESEARCH_CONTAINER_URL -O dl/$RESEARCH_CONTAINER
+	fi
 	if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
 		echo "Could not download $RESEARCH_CONTAINER"
 		exit 1
