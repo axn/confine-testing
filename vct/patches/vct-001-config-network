@@ -1,0 +1,13 @@
+Index: testing/vct_rootfs/vct/rootfs/etc/network/interfaces
+===================================================================
+--- testing.orig/vct_rootfs/vct/rootfs/etc/network/interfaces	2013-08-02 10:43:06.000000000 +0200
++++ testing/vct_rootfs/vct/rootfs/etc/network/interfaces	2013-10-23 17:08:04.988235613 +0200
+@@ -5,4 +5,7 @@
+ iface lo inet loopback
+ 
+ auto eth0
+-iface eth0 inet dhcp
++iface eth0 inet6 static
++	address fdf6:1e51:5f7b:b50c::2
++        netmask 64
++
