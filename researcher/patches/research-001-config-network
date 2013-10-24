@@ -1,7 +1,7 @@
-Index: testing/researcher_lxc/rootfs/etc/network/interfaces
+Index: researcher/researcher_lxc/rootfs/etc/network/interfaces
 ===================================================================
---- testing.orig/researcher_lxc/rootfs/etc/network/interfaces	2013-10-24 14:02:32.282164303 +0200
-+++ testing/researcher_lxc/rootfs/etc/network/interfaces	2013-10-24 14:06:18.402164595 +0200
+--- researcher.orig/researcher_lxc/rootfs/etc/network/interfaces	2013-10-24 14:02:32.282164303 +0200
++++ researcher/researcher_lxc/rootfs/etc/network/interfaces	2013-10-24 14:06:18.402164595 +0200
 @@ -2,4 +2,8 @@
  iface lo inet loopback
  
