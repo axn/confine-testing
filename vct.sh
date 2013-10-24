@@ -13,7 +13,7 @@ function start_vct (){
 
 	echo "Unpacking..."
 	rm -r vct/vct
-	tar -C vct --numeric-owner -xJf $VCT_CONTAINER
+	tar -C vct --numeric-owner -xJf dl/$VCT_CONTAINER
 
 	cd vct
 	echo "Patching..."

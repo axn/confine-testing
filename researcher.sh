@@ -14,7 +14,7 @@ function start_researcher(){
 
 	echo "Unpacking..."
 	rm -r researcher/researcher_lxc
-	tar -C researcher --numeric-owner -xJf $RESEARCH_CONTAINER
+	tar -C researcher --numeric-owner -xJf dl/$RESEARCH_CONTAINER
 
 	cd researcher
 	echo "Patching..."
