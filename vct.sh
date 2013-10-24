@@ -2,6 +2,8 @@ function start_vct (){
 	VCT_CONTAINER=$1
 	VCT_CONTAINER_URL=$2
 	
+	SLEEP=20
+	
 	# fetch/copy the latest VCT container
 	if [[ ! -f dl/$VCT_CONTAINER ]]; then
 		wget --no-check-certificate $VCT_CONTAINER_URL -O dl/$VCT_CONTAINER
@@ -23,8 +25,8 @@ function start_vct (){
 	echo "Starting LXC..."
 	lxc-start --name vct -f vct/config -s lxc.rootfs=$(pwd)/vct/rootfs -o vct.log -d
 
-	echo "Sleeping 10 seconds until booted..."
-	sleep 10
+	echo "Sleeping $SLEEP seconds until booted..."
+	sleep $SLEEP
 
 	echo "Pinging..."
 	ping6 -c 1 fdf6:1e51:5f7b:b50c::2 && echo "ok"
