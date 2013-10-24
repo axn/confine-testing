@@ -20,7 +20,7 @@ function start_vct (){
 	quilt push -a -v
 
 	echo "Starting LXC..."
-	lxc-start --name vct -f vct_rootfs/vct/config -d
+	lxc-start --name vct -f vct/config -d
 
 	echo "Sleeping 10 seconds until booted..."
 	sleep 10
