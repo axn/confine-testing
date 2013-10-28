@@ -42,9 +42,17 @@ function start_researcher(){
 
 	echo "Pinging..."
 	ping6 -c 1 fdf6:1e51:5f7b:b50c::3 && echo "ok"
-	
+}
+
+function run_tests(){
 	echo "SSHing..."
 	ssh -i ../sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 'whoami'
-	
+	if [[ $? != 0 ]]; then
+        echo "unable to ssh to researcher."
+    fi
+    
+    echo "Starting tests..."
+    ssh -i ../sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 \
+        'CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" python -m unittest discover -s confine-tests'
 	cd ..
 }
