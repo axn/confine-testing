@@ -27,6 +27,7 @@ function start_researcher(){
 	echo "Adding key..."
 	mkdir researcher_lxc/rootfs/root/.ssh
 	cp ../sshkey/id_rsa.pub researcher_lxc/rootfs/root/.ssh/authorized_keys
+	chmod 600 ../sshkey/id_rsa #avoid private ssh key permission problems
 	
 	echo "Adding tests..."
 	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
