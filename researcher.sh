@@ -45,6 +45,7 @@ function start_researcher(){
 	ping6 -c 1 fdf6:1e51:5f7b:b50c::3 && echo "ok"
 }
 
+
 function run_tests(){
 	echo "SSHing..."
 	ssh -i ../sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 'whoami'
@@ -57,3 +58,19 @@ function run_tests(){
         'CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" python -m unittest discover -s confine-tests'
 	cd ..
 }
+
+function archive_researcher() {
+    $id = $(date +%Y%m%d_%H%M%S)
+    if [[ $# > 1 ]]; then
+        $id = $2;
+    fi
+    cd researcher
+    tar -c --xz -f ../archive/researcher,$id.tar.xz researcher_lxc
+    cd ..
+}
+
+function tear_down_researcher(){
+    lxc-stop -n researcher;
+    lxc-destroy -n researcher;
+}
+

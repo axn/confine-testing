@@ -35,3 +35,17 @@ function start_vct (){
 	cd ..
 }
 
+function archive_vct() {
+    $id = $(date +%Y%m%d_%H%M%S)
+    if [ $# > 1 ]; then
+        $id = $2;
+    fi
+    cd vct
+    tar -c --xz -f ../archive/vct,$id.tar.xz vct
+    cd ..
+}
+
+function tear_down_vct(){
+    lxc-stop -n vct;
+    lxc-destroy -n vct;
+}
