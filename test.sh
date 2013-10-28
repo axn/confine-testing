@@ -19,6 +19,7 @@ start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
 
 run_tests
 status=$?
+echo "Tests ended with $status"
 
 if [[ status != 0 ]]; then
     id=$(date +%Y%m%d_%H%M%S);
