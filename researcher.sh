@@ -29,8 +29,7 @@ function start_researcher(){
 	cp ../sshkey/id_rsa.pub researcher_lxc/rootfs/root/.ssh/authorized_keys
 	
 	echo "Adding tests..."
-	#git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
-	git clone /tmp/confine-tests researcher_lxc/rootfs/root/confine-tests
+	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
     if [[ $? != 0 ]]; then
         echo "Could not fetch the tests."
     fi
