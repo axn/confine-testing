@@ -1,0 +1,9 @@
+Requirements:
+
+internet access :-)
+quilt
+ssh
+IPv6 support
+LXC
+mounted cgroup
+git
