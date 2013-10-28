@@ -17,5 +17,15 @@ start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
 source researcher.sh
 start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
 
+if [[ run_tests != 0 ]]; then
+    id = $(date +%Y%m%d_%H%M%S)
+    archive_vct $id
+    archive_researcher $id
+fi
+
+tear_down_researcher
+tear_down_vct
+
+
 echo "bye"
 exit 0
