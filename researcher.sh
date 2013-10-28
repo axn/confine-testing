@@ -62,8 +62,8 @@ function run_tests(){
 
 function archive_researcher() {
     id=$(date +%Y%m%d_%H%M%S);
-    if [[ $# > 1 ]]; then
-        id=$2;
+    if [[ $# > 0 ]]; then
+        id=$1;
     fi
     cd researcher
     tar -c --xz -f ../archive/researcher,$id.tar.xz researcher_lxc
