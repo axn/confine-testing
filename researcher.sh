@@ -26,6 +26,13 @@ function start_researcher(){
 	echo "Adding key..."
 	mkdir researcher_lxc/rootfs/root/.ssh
 	cp ../sshkey/id_rsa.pub researcher_lxc/rootfs/root/.ssh/authorized_keys
+	
+	echo "Adding tests..."
+	#git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
+	git clone /tmp/confine-tests.git researcher_lxc/rootfs/root/confine-tests
+    if [[ $? != 0 ]]; then
+        echo "Could not fetch the tests."
+    fi
 
 	echo "Starting LXC..."
 	lxc-start --name researcher -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
