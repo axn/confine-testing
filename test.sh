@@ -17,8 +17,10 @@ start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
 source researcher.sh
 start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
 
+set +e # allow failure
 run_tests
 status=$?
+set -e # fail on any exception
 echo "Tests ended with $status"
 
 if [[ status != 0 ]]; then
