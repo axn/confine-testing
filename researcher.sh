@@ -56,9 +56,7 @@ function run_tests(){
     echo "Starting tests..."
     ssh -i ../sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 \
         'CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" python -m unittest discover -s confine-tests'
-    status=$?
-	cd ..
-	return $status
+    return $?
 }
 
 function archive_researcher() {
