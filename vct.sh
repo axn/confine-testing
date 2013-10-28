@@ -36,6 +36,7 @@ function start_vct (){
 }
 
 function archive_vct() {
+    lxc-stop -n vct;
     id=$(date +%Y%m%d_%H%M%S);
     if [[ $# > 0 ]]; then
         id=$1;
