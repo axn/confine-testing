@@ -77,6 +77,5 @@ function tear_down_researcher(){
     if lxc-info -n researcher | grep running; then
         lxc-stop -n researcher;
     fi
-    lxc-destroy -n researcher;
 }
 

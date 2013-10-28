@@ -52,5 +52,4 @@ function tear_down_vct(){
     if lxc-info -n vct | grep running; then
         lxc-stop -n vct;
     fi
-    lxc-destroy -n vct;
 }
