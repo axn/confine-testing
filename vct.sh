@@ -14,7 +14,7 @@ function start_vct (){
 	fi
 
 	echo "Unpacking..."
-	if lxc-info -n vct | grep running; then
+	if lxc-info -n vct | grep RUNNING; then
 	    lxc-stop -n vct
     fi
 	rm -rf vct/vct
@@ -49,7 +49,7 @@ function archive_vct() {
 }
 
 function tear_down_vct(){
-    if lxc-info -n vct | grep running; then
+    if lxc-info -n vct | grep RUNNING; then
         lxc-stop -n vct;
     fi
 }
