@@ -3,7 +3,7 @@ function start_researcher(){
 	RESEARCH_CONTAINER=$1
 	RESEARCH_CONTAINER_URL=$2
 
-	SLEEP=20
+	SLEEP=5
 	
 	# fetch/copy the latest research container
 	if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
@@ -30,7 +30,7 @@ function start_researcher(){
 	
 	echo "Adding tests..."
 	#git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
-	git clone /tmp/confine-tests.git researcher_lxc/rootfs/root/confine-tests
+	git clone /tmp/confine-tests researcher_lxc/rootfs/root/confine-tests
     if [[ $? != 0 ]]; then
         echo "Could not fetch the tests."
     fi
