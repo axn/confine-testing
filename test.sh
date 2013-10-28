@@ -22,8 +22,8 @@ status=$?
 
 if [[ status != 0 ]]; then
     id=$(date +%Y%m%d_%H%M%S);
-    archive_vct $id
-    archive_researcher $id
+    echo archive_vct $id
+    echo archive_researcher $id
 fi
 
 tear_down_researcher
