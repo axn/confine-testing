@@ -3,7 +3,7 @@ function start_researcher(){
 	RESEARCH_CONTAINER=$1
 	RESEARCH_CONTAINER_URL=$2
 
-	SLEEP=20
+	SLEEP=5
 	
 	# fetch/copy the latest research container
 	if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
