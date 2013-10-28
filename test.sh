@@ -18,7 +18,7 @@ source researcher.sh
 start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
 
 if [[ run_tests != 0 ]]; then
-    id = $(date +%Y%m%d_%H%M%S)
+    id=$(date +%Y%m%d_%H%M%S);
     archive_vct $id
     archive_researcher $id
 fi
