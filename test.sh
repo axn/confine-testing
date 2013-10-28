@@ -23,10 +23,10 @@ status=$?
 set -e # fail on any exception
 echo "Tests ended with $status"
 
-if [[ status != 0 ]]; then
+if [[ $status != 0 ]]; then
     id=$(date +%Y%m%d_%H%M%S);
-    echo archive_vct $id
-    echo archive_researcher $id
+    archive_vct $id
+    archive_researcher $id
 fi
 
 tear_down_researcher
