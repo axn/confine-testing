@@ -38,7 +38,7 @@ function start_vct (){
 function archive_vct() {
     id=$(date +%Y%m%d_%H%M%S);
     if [ $# > 1 ]; then
-        $id = $2;
+        id=$2;
     fi
     cd vct
     tar -c --xz -f ../archive/vct,$id.tar.xz vct
