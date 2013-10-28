@@ -72,7 +72,7 @@ function archive_researcher() {
 }
 
 function tear_down_researcher(){
-    if lxc-info -n researcher | grep RUNNING; then
+    if lxc-info -n researcher | grep -q RUNNING; then
         lxc-stop -n researcher;
     fi
 }

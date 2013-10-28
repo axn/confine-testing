@@ -47,7 +47,7 @@ function archive_vct() {
 }
 
 function tear_down_vct(){
-    if lxc-info -n vct | grep RUNNING; then
+    if lxc-info -n vct | grep -q RUNNING; then
         lxc-stop -n vct;
     fi
 }
