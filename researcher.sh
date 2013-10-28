@@ -15,9 +15,7 @@ function start_researcher(){
 	fi
 
 	echo "Unpacking..."
-	if lxc-info -n researcher | grep RUNNING; then
-	    lxc-stop -n researcher
-	fi
+	tear_down_researcher
 	rm -rf researcher/researcher_lxc
 	tar -C researcher --numeric-owner -xJf dl/$RESEARCH_CONTAINER
 

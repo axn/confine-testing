@@ -14,9 +14,7 @@ function start_vct (){
 	fi
 
 	echo "Unpacking..."
-	if lxc-info -n vct | grep RUNNING; then
-	    lxc-stop -n vct
-    fi
+	tear_down_vct
 	rm -rf vct/vct
 	tar -C vct --numeric-owner -xJf dl/$VCT_CONTAINER
 
