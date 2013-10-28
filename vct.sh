@@ -14,7 +14,9 @@ function start_vct (){
 	fi
 
 	echo "Unpacking..."
-	lxc-stop -n vct
+	if lxc-info -n vct | grep running; then
+	    lxc-stop -n vct
+    fi
 	rm -rf vct/vct
 	tar -C vct --numeric-owner -xJf dl/$VCT_CONTAINER
 
@@ -47,6 +49,8 @@ function archive_vct() {
 }
 
 function tear_down_vct(){
-    lxc-stop -n vct;
+    if lxc-info -n vct | grep running; then
+        lxc-stop -n vct;
+    fi
     lxc-destroy -n vct;
 }

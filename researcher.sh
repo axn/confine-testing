@@ -15,7 +15,9 @@ function start_researcher(){
 	fi
 
 	echo "Unpacking..."
-	lxc-stop -n researcher
+	if lxc-info -n researcher | grep running; then
+	    lxc-stop -n researcher
+	fi
 	rm -rf researcher/researcher_lxc
 	tar -C researcher --numeric-owner -xJf dl/$RESEARCH_CONTAINER
 
@@ -72,7 +74,9 @@ function archive_researcher() {
 }
 
 function tear_down_researcher(){
-    lxc-stop -n researcher;
+    if lxc-info -n researcher | grep running; then
+        lxc-stop -n researcher;
+    fi
     lxc-destroy -n researcher;
 }
 
