@@ -12,9 +12,9 @@ RESEARCH_CONTAINER_URL=https://media.confine-project.eu/researcher-container/$RE
 set -e # fail on any exception
 
 source vct.sh
-start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
-
 source researcher.sh
+
+start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
 start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
 
 set +e # allow failure
