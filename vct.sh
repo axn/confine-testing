@@ -14,6 +14,7 @@ function start_vct (){
 	fi
 
 	echo "Unpacking..."
+	lxc-stop -n vct
 	rm -rf vct/vct
 	tar -C vct --numeric-owner -xJf dl/$VCT_CONTAINER
 

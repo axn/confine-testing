@@ -15,6 +15,7 @@ function start_researcher(){
 	fi
 
 	echo "Unpacking..."
+	lxc-stop -n researcher
 	rm -rf researcher/researcher_lxc
 	tar -C researcher --numeric-owner -xJf dl/$RESEARCH_CONTAINER
 
