@@ -1,0 +1,49 @@
+Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/rsa_key.priv
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/rsa_key.priv	2013-10-29 10:35:48.270668821 +0100
+@@ -0,0 +1,29 @@
++
++-----BEGIN RSA PRIVATE KEY-----
++MIIEowIBAAKCAQEA4hc5/TQ+dx/saxYeXio6O8OVuQQZi9VTdeb2mkcrBbagnzlU
++nTkLsA2pBKRMXMmgWYciW+VYZTo4KUKxrdKE2Fr/M4W6T5hY0j/inknb0z18a1gI
++AJ7YmHakOPCiKKaaOqF8tDK2SuMLDFCh6bj1tEHcBC8DvD7SpwuquM5H2pLuMinB
++hbHFgGNKtcYxQfjhCVKipk/+/95N/rytIDg/PV2O6kpSmYD7ISrgOjgEtDGKIW9J
++tgYIABFLpPt+7fpjcym/rjqZKSQr32QeNy6w+XlzaEtzbZa/tCtVpsUOP64Rk8DG
++PYUSLqOarIbCFx8fkaIQ1Q37dzIy0mAFC4xMeQIDAQABAoIBAHdFQ30062MSfzj6
++4ShR5IiUpE6HQCbJcg73uc4njyWjc1ar+tw6NNU6T5i4R+SHJUU1icWq1pgIP4pc
++ubj2Hsi4MHrwqBnHR8wakaVpV0M344QJW6dgJOlBZV74asNBKImXmV7ChfI5liF4
++BAJ1ZYEjYTr/xluvVJd1CyoVAEjoTiwyD6kIzgr6q39haiE96I8hudOv03Ftgkq1
++LiVzwOC0TAFBdydl926ra/+3KpdP9HsKC2QE8FlUWPk+/jDYFpcPhXYTz8o+ouGw
++kED7loQhGFRLdLwDxL3/RMsH8G+LNM0SyCvKlixvOIGF7IFS+SueqJAQ8yPzxSBK
++iwKlxlECgYEA+UCOUww4+1nBp/YfdOP8z3TOd7zShMCYlnx41TuEyLOVM6VhvQN5
++YYxMrboVjpaGn1zKvKQ46nn3UoPjWfXQFD6N9GVoVrpuWsZXsF8S7S/IDvqG47pk
++iMkECfMLbw50AwB0VHr8/Xl3esFeLq0AeulTgV/YrCevBNyqad5Os0UCgYEA6DYm
++Zw3qj6QkUP5rwvl/CSN5p0MiEQaNo9cvZJGwROqckVdON5XbxfH/OW4j4Xyc8jHs
++eA4D2Potti4ANZ2+0DNIRgL6mdJG6rVAz06iqnk603r8laCqgwZnBX08iDg2RUdW
++cjrDICe0QlRrX2rdMKje8vxDxuN45Niasg47TaUCgYEAwvIk3vt+TcjD2FR+AfSX
++NMMNAUWj+cSRE5JDB7PHhRpAJebB7Q2ckBkll/MlDSLaJCZ1QtnG0k2WjOkulpvV
++pR/P80ilNMAXs9PRndaefPiUJnL3sYGFRB7Ek+uOE8xgHEDsu25+FNo+ArreqO8S
++ow9/Cn8mfm+DSfA1MRx4vWkCgYBCV9Y48zzktRy7FzVqiyXEUqJbK078Vkb5XG1p
++6kXWKsF4tNzf/KzBrRYiLlmJ/rRIbgMFeduXjkKpHhNpPhxaF4y6k/dNI0qnnAlc
++MTdARUqNSUII7dJJhPbCFrnIoWa//FWyZR+CfFV/7eaPaFSxpk2sVm520F6l40yv
++OmmvEQKBgFzL59PhyKuf/WZxlZDH0+ov6BQWUVaIDJ82xmUl5srWWHqjpDZGBMef
++6lbSdMhXJXo7mT/9YamgY8sCV1w2dW6Hb6TVy9azEmyHeIO5osYr3vXUSRofN9vw
++G0bcCZHLom0kANAiFaeCAGNgSLj1/ndYl3Ewg9KtS+k+PGfCRiro
++-----END RSA PRIVATE KEY-----
++
+Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/rsa_key.pub
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/rsa_key.pub	2013-10-29 10:35:32.390668799 +0100
+@@ -0,0 +1,10 @@
++
++-----BEGIN RSA PUBLIC KEY-----
++MIIBCgKCAQEA4hc5/TQ+dx/saxYeXio6O8OVuQQZi9VTdeb2mkcrBbagnzlUnTkL
++sA2pBKRMXMmgWYciW+VYZTo4KUKxrdKE2Fr/M4W6T5hY0j/inknb0z18a1gIAJ7Y
++mHakOPCiKKaaOqF8tDK2SuMLDFCh6bj1tEHcBC8DvD7SpwuquM5H2pLuMinBhbHF
++gGNKtcYxQfjhCVKipk/+/95N/rytIDg/PV2O6kpSmYD7ISrgOjgEtDGKIW9JtgYI
++ABFLpPt+7fpjcym/rjqZKSQr32QeNy6w+XlzaEtzbZa/tCtVpsUOP64Rk8DGPYUS
++LqOarIbCFx8fkaIQ1Q37dzIy0mAFC4xMeQIDAQAB
++-----END RSA PUBLIC KEY-----
++

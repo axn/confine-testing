@@ -1,0 +1,15 @@
+Index: vct/vct/rootfs/var/lib/vct/tinc/confine/hosts/researcher
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ vct/vct/rootfs/var/lib/vct/tinc/confine/hosts/researcher	2013-10-29 10:20:03.762667689 +0100
+@@ -0,0 +1,10 @@
++Subnet=fd65:fc41:c50f:eeee:0:0:0:0/64
++
++-----BEGIN RSA PUBLIC KEY-----
++MIIBCgKCAQEA4hc5/TQ+dx/saxYeXio6O8OVuQQZi9VTdeb2mkcrBbagnzlUnTkL
++sA2pBKRMXMmgWYciW+VYZTo4KUKxrdKE2Fr/M4W6T5hY0j/inknb0z18a1gIAJ7Y
++mHakOPCiKKaaOqF8tDK2SuMLDFCh6bj1tEHcBC8DvD7SpwuquM5H2pLuMinBhbHF
++gGNKtcYxQfjhCVKipk/+/95N/rytIDg/PV2O6kpSmYD7ISrgOjgEtDGKIW9JtgYI
++ABFLpPt+7fpjcym/rjqZKSQr32QeNy6w+XlzaEtzbZa/tCtVpsUOP64Rk8DGPYUS
++LqOarIbCFx8fkaIQ1Q37dzIy0mAFC4xMeQIDAQAB
++-----END RSA PUBLIC KEY-----

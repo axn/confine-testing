@@ -1,0 +1,9 @@
+Index: vct/vct/rootfs/var/lib/vct/tinc/confine/tinc.conf
+===================================================================
+--- vct.orig/vct/rootfs/var/lib/vct/tinc/confine/tinc.conf	2013-10-28 16:25:46.014590851 +0100
++++ vct/vct/rootfs/var/lib/vct/tinc/confine/tinc.conf	2013-10-28 17:02:18.878593462 +0100
+@@ -1,4 +1,3 @@
+-BindToAddress = 10.241.0.254
+ Port = 655
+ Name = server
+ StrictSubnets = yes
