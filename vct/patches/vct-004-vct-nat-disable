@@ -1,0 +1,9 @@
+Index: vct/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
+===================================================================
+--- vct.orig/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides	2013-08-02 12:15:26.000000000 +0200
++++ vct/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides	2013-10-29 15:23:59.710689438 +0100
+@@ -1,2 +1,4 @@
+ VCT_KERNEL_MODULES=
+ VCT_SUDO_ASK=NO
++VCT_BR00_V4_NAT_OUT_DEV=""
++

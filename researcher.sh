@@ -24,8 +24,9 @@ function start_researcher(){
 	rm -rf .pc # remove old quilt information, if any
 	quilt push -a -v
 	
-	echo "chmod key..."
+	echo "chmod files..."
 	chmod 600 ../sshkey/id_rsa #avoid private ssh key permission problems
+	chmod 755 researcher_lxc/rootfs/etc/tinc/confine/tinc-{up,down}
 	
 	echo "Adding tests..."
 	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
