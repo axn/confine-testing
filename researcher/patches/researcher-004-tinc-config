@@ -1,25 +1,17 @@
 Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc.conf
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc.conf	2013-10-29 15:38:06.478690439 +0100
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc.conf	2013-10-29 15:59:58.982692003 +0100
 @@ -0,0 +1,5 @@
 +Name = researcher
 +ConnectTo = server
 +Address = fdf6:1e51:5f7b:b50c::2
 +Subnet = fd65:fc41:c50f:eeee:0:0:0:0/64
 +
-Index: researcher/researcher_lxc/rootfs/etc/default/tinc
-===================================================================
---- researcher.orig/researcher_lxc/rootfs/etc/default/tinc	2013-10-29 11:55:23.000000000 +0100
-+++ researcher/researcher_lxc/rootfs/etc/default/tinc	2013-10-29 15:38:06.482690439 +0100
-@@ -1,2 +1,3 @@
- # Extra options to be passed to tincd.
- # EXTRA="-d"
-+EXTRA="-n confine"
 Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/researcher
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/researcher	2013-10-29 15:38:06.482690439 +0100
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/researcher	2013-10-29 15:59:58.986692002 +0100
 @@ -0,0 +1,11 @@
 +Subnet=fd65:fc41:c50f:eeee:0:0:0:0/64
 +
@@ -35,7 +27,7 @@ Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/researcher
 Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/server
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/server	2013-10-29 15:38:06.482690439 +0100
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/server	2013-10-29 15:59:58.986692002 +0100
 @@ -0,0 +1,12 @@
 +Address = fdf6:1e51:5f7b:b50c::2 655
 +Subnet = fd65:fc41:c50f:0:0:0:0:2/128
@@ -52,7 +44,7 @@ Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/hosts/server
 Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-down
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-down	2013-10-29 15:46:57.806691073 +0100
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-down	2013-10-29 15:59:58.986692002 +0100
 @@ -0,0 +1,4 @@
 +#!/bin/sh
 +ip -6 addr del fd65:fc41:c50f:eeee::2/48 dev "$INTERFACE"
@@ -61,8 +53,16 @@ Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-down
 Index: researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-up
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-up	2013-10-29 15:46:47.938691123 +0100
++++ researcher/researcher_lxc/rootfs/etc/tinc/confine/tinc-up	2013-10-29 15:59:58.986692002 +0100
 @@ -0,0 +1,3 @@
 +#!/bin/sh
 +ip -6 link set "$INTERFACE" up mtu 1400
 +ip -6 addr add fd65:fc41:c50f:eeee::2/48 dev "$INTERFACE"
+Index: researcher/researcher_lxc/rootfs/etc/tinc/nets.boot
+===================================================================
+--- researcher.orig/researcher_lxc/rootfs/etc/tinc/nets.boot	2013-10-29 10:24:02.000000000 +0100
++++ researcher/researcher_lxc/rootfs/etc/tinc/nets.boot	2013-10-29 16:02:28.910692510 +0100
+@@ -1 +1,3 @@
+ ## This file contains all names of the networks to be started on system startup.
++confine
++
