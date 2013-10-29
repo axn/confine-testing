@@ -24,9 +24,7 @@ function start_researcher(){
 	rm -rf .pc # remove old quilt information, if any
 	quilt push -a -v
 	
-	echo "Adding key..."
-	mkdir researcher_lxc/rootfs/root/.ssh
-	cp ../sshkey/id_rsa.pub researcher_lxc/rootfs/root/.ssh/authorized_keys
+	echo "chmod key..."
 	chmod 600 ../sshkey/id_rsa #avoid private ssh key permission problems
 	
 	echo "Adding tests..."
