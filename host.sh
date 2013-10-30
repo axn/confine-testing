@@ -14,4 +14,5 @@ function configure_network() {
     
     echo "Configure $LXC_NETWORK_LINK..."
     ip -6 addr add fdf6:1e51:5f7b:b50c::1 dev $LXC_NETWORK_LINK;
+    return 0
 }
