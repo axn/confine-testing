@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # CONFINE testing script using VCT and LXC
 # lots of work to do
@@ -11,9 +11,9 @@ RESEARCH_CONTAINER_URL=https://media.confine-project.eu/researcher-container/$RE
 
 set -e # fail on any exception
 
-. host.sh
-. vct.sh
-. researcher.sh
+. ./host.sh
+. ./vct.sh
+. ./researcher.sh
 
 configure_network
 
