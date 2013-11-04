@@ -6,7 +6,7 @@
 # URLs
 VCT_CONTAINER=vct-container,2013080200.tar.xz
 VCT_CONTAINER_URL=https://media.confine-project.eu/vct-container/$VCT_CONTAINER
-RESEARCH_CONTAINER=researcher,20131029.tar.xz
+RESEARCH_CONTAINER=researcher,20131104.tar.xz
 RESEARCH_CONTAINER_URL=https://media.confine-project.eu/researcher-container/$RESEARCH_CONTAINER
 
 set -e # fail on any exception
