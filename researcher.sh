@@ -29,6 +29,7 @@ function start_researcher(){
 	chmod 755 researcher_lxc/rootfs/etc/tinc/confine/tinc-{up,down}
 	
 	echo "Adding tests..."
+	git clone http://git.confine-project.eu/confine/confine-utils.git researcher_lxc/rootfs/root/confine-utils
 	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
     if [[ $? != 0 ]]; then
         echo "Could not fetch the tests."
@@ -56,7 +57,7 @@ function run_tests(){
     sleep 20
     echo "Starting tests..."
     ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 \
-        'CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" python -m unittest discover -s ./confine-tests/'
+        'env CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" PYTHONPATH=confine-utils:confine.client python -m unittest discover -s ./confine-tests/'
     return $?
 }
 
