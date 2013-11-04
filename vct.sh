@@ -37,8 +37,8 @@ function start_vct (){
 	echo "SSHing..."
 	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'whoami'
 
-	echo "vct_system_init"
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'sudo -u vct bash /home/vct/confine-dist/utils/vct/vct_system_init'
+#	echo "vct_system_init"
+#	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'sudo -u vct bash /home/vct/confine-dist/utils/vct/vct_system_init'
 
 }
 
