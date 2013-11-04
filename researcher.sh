@@ -57,7 +57,7 @@ function run_tests(){
     sleep 20
     echo "Starting tests..."
     ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 \
-        'env CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" PYTHONPATH=confine-utils:confine.client python -m unittest discover -s ./confine-tests/'
+        'env CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" CONFINE_USER="vct" CONFINE_PASSWORD="vct"  PYTHONPATH=confine-utils:confine.client python -m unittest discover -s ./confine-tests/'
     return $?
 }
 
