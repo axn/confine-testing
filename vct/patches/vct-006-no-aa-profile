@@ -1,0 +1,10 @@
+Index: vct/vct/config
+===================================================================
+--- vct.orig/vct/config	2013-08-02 10:49:17.000000000 +0200
++++ vct/vct/config	2013-11-04 14:32:13.967827582 +0100
+@@ -87,5 +87,3 @@
+ # /dev/fuse
+ lxc.cgroup.devices.allow = c 10:229 rwm
+ 
+-## Disable AppArmor for VCT
+-lxc.aa_profile = unconfined
