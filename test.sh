@@ -27,12 +27,16 @@ set -e # fail on any exception
 echo "Tests ended with $status"
 
 if [[ $status != 0 ]]; then
+	echo "Tests failed, archiving both containers for inspection"
     id=$(date +%Y%m%d_%H%M%S);
     archive_vct $id
     archive_researcher $id
 fi
 
+echo "Tearing down containers"
 tear_down_researcher
 tear_down_vct
+
+echo "Done"
 
 exit $status
