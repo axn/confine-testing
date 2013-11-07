@@ -29,8 +29,8 @@ function start_researcher(){
 	chmod 755 researcher_lxc/rootfs/etc/tinc/confine/tinc-{up,down}
 	
 	echo "Adding tests..."
-	git clone http://git.confine-project.eu/confine/confine-utils.git researcher_lxc/rootfs/root/confine-utils
-	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/root/confine-tests
+	git clone http://git.confine-project.eu/confine/confine-utils.git researcher_lxc/rootfs/home/vct/confine-utils
+	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/home/vct/confine-tests
     if [[ $? != 0 ]]; then
         echo "Could not fetch the tests."
     fi
@@ -49,14 +49,14 @@ function start_researcher(){
 
 function run_tests(){
 	echo "SSHing..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 'whoami'
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::3 'whoami'
 	if [[ $? != 0 ]]; then
         echo "unable to ssh to researcher."
     fi
 
     sleep 20
     echo "Starting tests..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::3 \
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::3 \
         'env CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" CONFINE_USER="vct" CONFINE_PASSWORD="vct"  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/'
     return $?
 }

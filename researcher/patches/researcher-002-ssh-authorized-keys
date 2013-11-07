@@ -5,3 +5,10 @@ Index: researcher/researcher_lxc/rootfs/root/.ssh/authorized_keys
 @@ -0,0 +1,2 @@
 +ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxNRiCTU6LzSzpufzf6VfHbStLAB82JBds7kwMM2TpPxAYt6waD0vpXuBAah74K9epUlNxYv78Q+mOdzgCde5sqxU2NwzMZK1rBU+TMxp8kkvNHI9+QdXe6fwgDop6qPq22YqLDGsAOUQE8FCH3PPmWvqI+SeFRbvxPdQ9dCMub7swp/HKUXkV9uPGFGTMKWXQbF5yXs0Pjz0xTA4t4hrju9CsyTtdu36skBIh8547zuGPJnDO51jr5yNgT5MNQ8jrgexKdayYtnHybrK1uUxWL205txNu+N61Z7VTNvh0S+O2kaQ6T0ssx3UhkERbm+o+10JI0nExDlkR06v3/TLD CONFINE testing key
 +
+Index: researcher/researcher_lxc/rootfs/home/vct/.ssh/authorized_keys
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ researcher/researcher_lxc/rootfs/home/vct/.ssh/authorized_keys	2013-10-29 10:33:36.822668660 +0100
+@@ -0,0 +1,2 @@
++ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxNRiCTU6LzSzpufzf6VfHbStLAB82JBds7kwMM2TpPxAYt6waD0vpXuBAah74K9epUlNxYv78Q+mOdzgCde5sqxU2NwzMZK1rBU+TMxp8kkvNHI9+QdXe6fwgDop6qPq22YqLDGsAOUQE8FCH3PPmWvqI+SeFRbvxPdQ9dCMub7swp/HKUXkV9uPGFGTMKWXQbF5yXs0Pjz0xTA4t4hrju9CsyTtdu36skBIh8547zuGPJnDO51jr5yNgT5MNQ8jrgexKdayYtnHybrK1uUxWL205txNu+N61Z7VTNvh0S+O2kaQ6T0ssx3UhkERbm+o+10JI0nExDlkR06v3/TLD CONFINE testing key
++
