@@ -78,6 +78,7 @@ function build_vct_testing() {
     GIT_BRANCH=origin/testing
     VCT_SERVER_VERSION=dev
 
+    mkdir -p $VCT_CONTAINER_DIR
     extract_vct
     start_vct
     sleep 10
