@@ -4,7 +4,7 @@
 # lots of work to do
 
 # URLs
-VCT_CONTAINER=vct,20131104.tar.xz
+VCT_CONTAINER=vct-container,a09b3bb906133c823b33c4f8d5cf1faf4eacbd9f,c4ccc10e10be2754f6ac1fb7be6ee87f8de267e9,a09b3bb906133c823b33c4f8d5cf1faf4eacbd9f.tar.xz
 VCT_CONTAINER_URL=https://media.confine-project.eu/vct-container/$VCT_CONTAINER
 RESEARCH_CONTAINER=researcher,20131107.tar.xz
 RESEARCH_CONTAINER_URL=https://media.confine-project.eu/researcher-container/$RESEARCH_CONTAINER
