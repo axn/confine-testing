@@ -130,3 +130,7 @@ function build_vct() {
 	stop_vct
 	tar_xz_vct
 }
+
+function build_vct_testing() {
+	build_vct origin/testing origin/master origin/testing
+}
