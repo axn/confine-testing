@@ -26,10 +26,14 @@ function extract_vct(){
 
 function update_vct() {
 	echo "Updating VCT to $VCT_HASH..."
+	CDDIR=$VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+	mv $CDDIR/utils/vct/vct.conf.overrides /tmp/
 	rm -rf $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
-    git clone http://git.confine-project.eu/confine.git $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
-	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+    git clone http://git.confine-project.eu/confine.git $CDDIR
+	cd $CDDIR
 	git checkout $VCT_HASH
+	mv /tmp/vct.conf.overrides ./utils/vct/
+	
 	VCT_HASH=$(git rev-parse $VCT_HASH)
 	if ! [ ${#NODEFIRMWARE_HASH} -eq 40 ]; then
 		NODEFIRMWARE_HASH=$(git rev-parse $NODEFIRMWARE_HASH)
