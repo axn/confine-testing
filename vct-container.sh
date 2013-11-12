@@ -108,6 +108,8 @@ function install_node_firmware() {
 		URL=http://builds.confine-project.eu/confine/openwrt/x86/$branch-builds/$NODEFIRMWARE_HASH/images/CONFINE-openwrt-$branch-latest.img.gz
 		if wget --spider $URL; then
 			echo VCT_NODE_TEMPLATE_URL=\"$URL\" >> $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
+			#this should be changed
+			wget $URL -O $VCT_CONTAINER_DIR/vct/rootfs/var/lib/vct/downloads/CONFINE-owrt-master-atom-20130925-1614.img.gz
 			break;
 		fi
 	done
@@ -129,9 +131,9 @@ function build_vct() {
 	clean_vct
 	update_vct
 	network_vct
-	install_node_firmware
 	update_controller
 	install_vct
+	install_node_firmware
 	init_vct
 	stop_vct
 	tar_xz_vct
