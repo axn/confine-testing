@@ -26,7 +26,9 @@ function extract_vct(){
 
 function update_vct() {
 	echo "Updating VCT to $VCT_HASH..."
-    cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+	rm -rf $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+    git clone http://git.confine-project.eu/confine.git $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
 	git checkout $VCT_HASH
 	VCT_HASH=$(git rev-parse $VCT_HASH)
 	if ! [ ${#NODEFIRMWARE_HASH} -eq 40 ]; then
