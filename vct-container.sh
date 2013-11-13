@@ -88,6 +88,7 @@ function tar_xz_vct() {
 	name=vct-container,$VCT_HASH,$CONTROLLER_HASH,$NODEFIRMWARE_HASH.tar.xz
     tar -c --xz -f ./$name vct
     cd -
+	mv $VCT_CONTAINER_DIR/$name ./dl/
 	echo $name
 }
 
