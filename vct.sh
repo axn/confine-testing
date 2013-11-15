@@ -6,7 +6,7 @@ function start_vct (){
 	
 	# fetch/copy the latest VCT container
 	if [[ ! -f dl/$VCT_CONTAINER ]]; then
-		wget --no-check-certificate $VCT_CONTAINER_URL -O dl/$VCT_CONTAINER
+		wget -q --no-check-certificate $VCT_CONTAINER_URL -O dl/$VCT_CONTAINER
 	fi
 	if [[ ! -f dl/$VCT_CONTAINER ]]; then
 		echo "Could not download $VCT_CONTAINER"
