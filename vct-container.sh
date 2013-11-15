@@ -34,9 +34,10 @@ function update_vct() {
 	git checkout $VCT_HASH
 	mv /tmp/vct.conf.overrides ./utils/vct/
 	
-	VCT_HASH=$(git rev-parse $VCT_HASH)
+	VCT_HASH=$(git rev-parse --short $VCT_HASH)
 	if ! [ ${#NODEFIRMWARE_HASH} -eq 40 ]; then
-		NODEFIRMWARE_HASH=$(git rev-parse $NODEFIRMWARE_HASH)
+		NODEFIRMWARE_HASH=$(git rev-parse --short $NODEFIRMWARE_HASH)
+		NODEFIRMWARE_HASH_LONG=$(git rev-parse $NODEFIRMWARE_HASH)
 	fi
 	cd -
 }
@@ -98,7 +99,7 @@ function update_controller() {
 	git clone http://git.confine-project.eu/confine/controller.git  $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	git checkout $CONTROLLER_HASH
-	CONTROLLER_HASH=$(git rev-parse $CONTROLLER_HASH)
+	CONTROLLER_HASH=$(git rev-parse --short $CONTROLLER_HASH)
 	cd -
 	echo "/home/vct/confine-controller" > $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller.pth
 }
@@ -106,7 +107,7 @@ function update_controller() {
 function install_node_firmware() {
 	echo "Updating node firmware to $NODEFIRMWARE_HASH"
 	for branch in testing master; do
-		URL=http://builds.confine-project.eu/confine/openwrt/x86/$branch-builds/$NODEFIRMWARE_HASH/images/CONFINE-openwrt-$branch-latest.img.gz
+		URL=http://builds.confine-project.eu/confine/openwrt/x86/$branch-builds/$NODEFIRMWARE_HASH_LONG/images/CONFINE-openwrt-$branch-latest.img.gz
 		if wget --spider $URL; then
 			echo VCT_NODE_TEMPLATE_URL=\"$URL\" >> $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
 			#this should be changed
