@@ -86,7 +86,7 @@ function tar_xz_vct() {
     quilt pop -a -v -f
     #tar
     id=$(date +%Y%m%d_%H%M%S);
-	name=vct-container,$VCT_HASH,$CONTROLLER_HASH,$NODEFIRMWARE_HASH.tar.xz
+	name=vct-container,vct$VCT_HASH,controller$CONTROLLER_HASH,nodefw$NODEFIRMWARE_HASH.tar.xz
     tar -c --xz -f ./$name vct
     cd -
 	mv $VCT_CONTAINER_DIR/$name ./dl/
