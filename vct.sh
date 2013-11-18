@@ -24,7 +24,7 @@ function start_vct (){
 	quilt push -a -v
 
 	echo "Starting LXC..."
-	lxc-start --name vct -f vct/config -s lxc.rootfs=$(pwd)/vct/rootfs -o vct.log -d
+	lxc-start --name $VCT_LXC -f vct/config -s lxc.rootfs=$(pwd)/vct/rootfs -o vct.log -d
 
 	echo "Sleeping $SLEEP seconds until booted..."
 	sleep $SLEEP
@@ -43,7 +43,7 @@ function start_vct (){
 }
 
 function archive_vct() {
-    lxc-stop -n vct;
+    lxc-stop -n $VCT_LXC;
     id=$(date +%Y%m%d_%H%M%S);
     if [[ $# > 0 ]]; then
         id=$1;
@@ -54,7 +54,9 @@ function archive_vct() {
 }
 
 function tear_down_vct(){
-    if lxc-info -n vct | grep -q RUNNING; then
-        lxc-stop -n vct;
+    if lxc-info -n $VCT_LXC | grep -q RUNNING; then
+        lxc-stop -n $VCT_LXC;
     fi
 }
+
+VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}

@@ -36,7 +36,7 @@ function start_researcher(){
     fi
 
 	echo "Starting LXC..."
-	lxc-start --name researcher -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
+	lxc-start --name $RESEARCHER_LXC -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
 
 	echo "Sleeping $SLEEP seconds until booted..."
 	sleep $SLEEP
@@ -62,7 +62,7 @@ function run_tests(){
 }
 
 function archive_researcher() {
-    lxc-stop -n researcher;
+    lxc-stop -n $RESEARCHER_LXC;
     id=$(date +%Y%m%d_%H%M%S);
     if [[ $# > 0 ]]; then
         id=$1;
@@ -73,8 +73,9 @@ function archive_researcher() {
 }
 
 function tear_down_researcher(){
-    if lxc-info -n researcher | grep -q RUNNING; then
-        lxc-stop -n researcher;
+    if lxc-info -n $RESEARCHER_LXC | grep -q RUNNING; then
+        lxc-stop -n $RESEARCHER_LXC;
     fi
 }
 
+RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}
