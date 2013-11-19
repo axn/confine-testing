@@ -30,12 +30,12 @@ function start_vct (){
 	sleep $SLEEP
 
 	echo "Pinging..."
-	ping6 -c 1 fdf6:1e51:5f7b:b50c::2 && echo "ok"
+	ping6 -c 1 $VCT_IP && echo "ok"
 
 	cd ..
 
 	echo "SSHing..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'whoami'
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@$VCT_IP 'whoami'
 
 #	echo "vct_system_init"
 #	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'sudo -u vct bash /home/vct/confine-dist/utils/vct/vct_system_init'
@@ -60,3 +60,4 @@ function tear_down_vct(){
 }
 
 VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}
+VCT_IP=fdf6:1e51:5f7b:b50c::2

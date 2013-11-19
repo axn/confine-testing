@@ -42,22 +42,22 @@ function start_researcher(){
 	sleep $SLEEP
 
 	echo "Pinging..."
-	ping6 -c 1 fdf6:1e51:5f7b:b50c::3 && echo "ok"
+	ping6 -c 1 $RESEARCHER_IP && echo "ok"
 	cd ..
 }
 
 
 function run_tests(){
 	echo "SSHing..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::3 'whoami'
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$RESEARCHER_IP 'whoami'
 	if [[ $? != 0 ]]; then
         echo "unable to ssh to researcher."
     fi
 
     sleep 20
     echo "Starting tests..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::3 \
-        'env CONFINE_SERVER_API="http://[fdf6:1e51:5f7b:b50c::2]/api" CONFINE_USER="vct" CONFINE_PASSWORD="vct"  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/'
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$RESEARCHER_IP \
+        "env CONFINE_SERVER_API=\"http://[${VCT_IP}]/api\" CONFINE_USER=\"vct\" CONFINE_PASSWORD=\"vct\"  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/"
     return $?
 }
 
@@ -79,3 +79,4 @@ function tear_down_researcher(){
 }
 
 RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}
+RESEARCHER_IP=fdf6:1e51:5f7b:b50c::3
