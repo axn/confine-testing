@@ -22,11 +22,9 @@ function offset_ips(){
 	VCT_IP=${IPPREFIX}$((2+${IPOFFSET}));
 	RESEARCHER_IP=${IPPREFIX}$((3+${IPOFFSET}));
 	echo "vct container on $VCT_IP, researcher container on $RESEARCHER_IP"
-	if ! [ $IPOFFSET -eq 0 ]; then
-		echo "Updating patches to IP offset $IPOFFSET"
-		find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::2/${VCT_IP}/g" {} \;
-		find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::3/${RESEARCHER_IP}/g" {} \;
-	fi
+	echo "Updating patches to IP offset $IPOFFSET"
+	find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::2/${VCT_IP}/g" {} \;
+	find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::3/${RESEARCHER_IP}/g" {} \;
 	find */patches/ -type f -exec sed -i "s/vmbridge/${LXC_NETWORK_LINK}/g" {} \;
 }
 
