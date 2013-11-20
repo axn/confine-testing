@@ -27,6 +27,7 @@ function offset_ips(){
 		find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::2/${VCT_IP}/g" {} \;
 		find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::3/${RESEARCHER_IP}/g" {} \;
 	fi
+	find */patches/ -type f -exec sed -i "s/vmbridge/${LXC_NETWORK_LINK}/g" {} \;
 }
 
 LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};

@@ -66,3 +66,14 @@ Index: researcher/researcher_lxc/rootfs/etc/tinc/nets.boot
  ## This file contains all names of the networks to be started on system startup.
 +confine
 +
+Index: researcher/researcher_lxc/config
+===================================================================
+--- researcher.orig/researcher_lxc/config	2013-10-29 11:55:15.000000000 +0100
++++ researcher/researcher_lxc/config	2013-11-20 16:32:15.222976644 +0100
+@@ -33,5 +33,5 @@
+ lxc.network.type                        = veth
+ lxc.network.flags                       = up
+ lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BF
+-lxc.network.link                        = vmbr
++lxc.network.link                        = vmbridge
+ lxc.network.name                        = eth0
