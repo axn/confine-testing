@@ -15,6 +15,9 @@ set -e # fail on any exception
 . ./vct.sh
 . ./researcher.sh
 
+echo "Using vct: $VCT_CONTAINER"
+echo "Using researcher: $RESEARCH_CONTAINER"
+
 configure_network
 offset_ips
 
