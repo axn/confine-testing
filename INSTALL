@@ -7,3 +7,8 @@ IPv6 support
 LXC
 mounted cgroup
 git
+
+optional variables
+VCT_LXC: name of vct lxc (default: vct_<timestamp>)
+RESEARCHER_LXC: name of researcher lxc (default: researcher_<timestamp>)
+IPOFFSET: offset of used ip addresses (default: 0)

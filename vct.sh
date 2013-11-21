@@ -6,7 +6,7 @@ function start_vct (){
 	
 	# fetch/copy the latest VCT container
 	if [[ ! -f dl/$VCT_CONTAINER ]]; then
-		wget --no-check-certificate $VCT_CONTAINER_URL -O dl/$VCT_CONTAINER
+		wget -q --no-check-certificate $VCT_CONTAINER_URL -O dl/$VCT_CONTAINER
 	fi
 	if [[ ! -f dl/$VCT_CONTAINER ]]; then
 		echo "Could not download $VCT_CONTAINER"
@@ -24,18 +24,18 @@ function start_vct (){
 	quilt push -a -v
 
 	echo "Starting LXC..."
-	lxc-start --name vct -f vct/config -s lxc.rootfs=$(pwd)/vct/rootfs -o vct.log -d
+	lxc-start --name $VCT_LXC -f vct/config -s lxc.rootfs=$(pwd)/vct/rootfs -o vct.log -d
 
 	echo "Sleeping $SLEEP seconds until booted..."
 	sleep $SLEEP
 
 	echo "Pinging..."
-	ping6 -c 1 fdf6:1e51:5f7b:b50c::2 && echo "ok"
+	ping6 -c 1 $VCT_IP && echo "ok"
 
 	cd ..
 
 	echo "SSHing..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'whoami'
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@$VCT_IP 'whoami'
 
 #	echo "vct_system_init"
 #	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'sudo -u vct bash /home/vct/confine-dist/utils/vct/vct_system_init'
@@ -43,7 +43,7 @@ function start_vct (){
 }
 
 function archive_vct() {
-    lxc-stop -n vct;
+    lxc-stop -n $VCT_LXC;
     id=$(date +%Y%m%d_%H%M%S);
     if [[ $# > 0 ]]; then
         id=$1;
@@ -54,7 +54,10 @@ function archive_vct() {
 }
 
 function tear_down_vct(){
-    if lxc-info -n vct | grep -q RUNNING; then
-        lxc-stop -n vct;
+    if lxc-info -n $VCT_LXC | grep -q RUNNING; then
+        lxc-stop -n $VCT_LXC;
     fi
 }
+
+VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}
+VCT_IP=fdf6:1e51:5f7b:b50c::2

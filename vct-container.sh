@@ -26,11 +26,18 @@ function extract_vct(){
 
 function update_vct() {
 	echo "Updating VCT to $VCT_HASH..."
-    cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+	CDDIR=$VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+	mv $CDDIR/utils/vct/vct.conf.overrides /tmp/
+	rm -rf $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
+    git clone http://git.confine-project.eu/confine.git $CDDIR
+	cd $CDDIR
 	git checkout $VCT_HASH
-	VCT_HASH=$(git rev-parse $VCT_HASH)
+	mv /tmp/vct.conf.overrides ./utils/vct/
+	
+	VCT_HASH=$(git rev-parse --short $VCT_HASH)
 	if ! [ ${#NODEFIRMWARE_HASH} -eq 40 ]; then
-		NODEFIRMWARE_HASH=$(git rev-parse $NODEFIRMWARE_HASH)
+		NODEFIRMWARE_HASH=$(git rev-parse --short $NODEFIRMWARE_HASH)
+		NODEFIRMWARE_HASH_LONG=$(git rev-parse $NODEFIRMWARE_HASH)
 	fi
 	cd -
 }
@@ -79,9 +86,10 @@ function tar_xz_vct() {
     quilt pop -a -v -f
     #tar
     id=$(date +%Y%m%d_%H%M%S);
-	name=vct-container,$VCT_HASH,$CONTROLLER_HASH,$NODEFIRMWARE_HASH.tar.xz
+	name=vct-container,vct$VCT_HASH,controller$CONTROLLER_HASH,nodefw$NODEFIRMWARE_HASH.tar.xz
     tar -c --xz -f ./$name vct
     cd -
+	mv $VCT_CONTAINER_DIR/$name ./dl/
 	echo $name
 }
 
@@ -91,7 +99,7 @@ function update_controller() {
 	git clone http://git.confine-project.eu/confine/controller.git  $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	git checkout $CONTROLLER_HASH
-	CONTROLLER_HASH=$(git rev-parse $CONTROLLER_HASH)
+	CONTROLLER_HASH=$(git rev-parse --short $CONTROLLER_HASH)
 	cd -
 	echo "/home/vct/confine-controller" > $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller.pth
 }
@@ -99,9 +107,11 @@ function update_controller() {
 function install_node_firmware() {
 	echo "Updating node firmware to $NODEFIRMWARE_HASH"
 	for branch in testing master; do
-		URL=http://builds.confine-project.eu/confine/openwrt/x86/$branch-builds/$NODEFIRMWARE_HASH/images/CONFINE-openwrt-$branch-latest.img.gz
-		if wget --spider $URL; then
+		URL=http://builds.confine-project.eu/confine/openwrt/x86/$branch-builds/$NODEFIRMWARE_HASH_LONG/images/CONFINE-openwrt-$branch-latest.img.gz
+		if wget -q --spider $URL; then
 			echo VCT_NODE_TEMPLATE_URL=\"$URL\" >> $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
+			#this should be changed
+			wget -q $URL -O $VCT_CONTAINER_DIR/vct/rootfs/var/lib/vct/downloads/CONFINE-owrt-master-atom-20130925-1614.img.gz
 			break;
 		fi
 	done
@@ -123,10 +133,14 @@ function build_vct() {
 	clean_vct
 	update_vct
 	network_vct
-	install_node_firmware
 	update_controller
 	install_vct
+	install_node_firmware
 	init_vct
 	stop_vct
 	tar_xz_vct
+}
+
+function build_vct_testing() {
+	build_vct origin/testing origin/master origin/testing
 }
