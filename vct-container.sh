@@ -13,6 +13,7 @@ function extract_vct(){
 	
     echo "Unpacking..."
 	
+	lxc-stop -n $VCT_CONTAINER_DIR
 	rm -rf $VCT_CONTAINER_DIR/vct
 	tar -C $VCT_CONTAINER_DIR --numeric-owner -xJf dl/$VCT_CONTAINER
 	
