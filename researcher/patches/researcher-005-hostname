@@ -1,0 +1,10 @@
+Index: researcher/researcher_lxc/rootfs/etc/hosts
+===================================================================
+--- researcher.orig/researcher_lxc/rootfs/etc/hosts	2013-11-22 10:36:17.897210331 +0100
++++ researcher/researcher_lxc/rootfs/etc/hosts	2013-11-22 10:37:09.321209710 +0100
+@@ -4,4 +4,5 @@
+ ff00::0		ip6-mcastprefix
+ ff02::1		ip6-allnodes
+ ff02::2		ip6-allrouters
++fdf6:1e51:5f7b:b50c::2		vctserver
+ 

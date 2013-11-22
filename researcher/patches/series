@@ -2,3 +2,5 @@ research-001-config-network
 researcher-002-ssh-authorized-keys
 researcher-003-tinc-keys
 researcher-004-tinc-config
+researcher-005-hostname
+researcher-006-lxc_bridge
