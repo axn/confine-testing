@@ -103,11 +103,11 @@ function update_controller() {
 	git clone http://git.confine-project.eu/confine/controller.git $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	git checkout $CONTROLLER_HASH
-	# use the newest controller-admin
-	cp controller/bin/controller-admin.sh $VCT_CONTAINER_DIR/vct/rootfs/usr/local/bin/
 	CONTROLLER_HASH=$(git rev-parse --short $CONTROLLER_HASH)
 	cd -
 	echo "/home/vct/confine-controller" > $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller.pth
+	# use the newest controller-admin
+	cp $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller/controller/bin/controller-admin.sh $VCT_CONTAINER_DIR/vct/rootfs/usr/local/bin/
 	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'cd /home/vct/confine-dist/utils/vct/server/ && sudo python ./manage.py postupgradecontroller --from=$CONTROLLER_VERSION' > $VCT_CONTAINER_DIR/vct_update_controller.log 2>&1
 }
 
