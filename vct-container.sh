@@ -104,7 +104,7 @@ function update_controller() {
 	CONTROLLER_HASH=$(git rev-parse --short $CONTROLLER_HASH)
 	cd -
 	echo "/home/vct/confine-controller" > $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller.pth
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'python /home/vct/confine-dist/utils/vct/server/manage.py postupgradecontroller --from=$CONTROLLER_VERSION'
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'sudo python /home/vct/confine-dist/utils/vct/server/manage.py postupgradecontroller --from=$CONTROLLER_VERSION'
 }
 
 
