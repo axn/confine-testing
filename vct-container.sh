@@ -95,14 +95,17 @@ function tar_xz_vct() {
 
 function update_controller() {
 	echo "Updating controller to $CONTROLLER_HASH"
+	CONTROLLER_VERSION=$(ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'python /home/vct/confine-dist/utils/vct/server/manage.py controllerversion')
 	rm -rf $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller
-	git clone http://git.confine-project.eu/confine/controller.git  $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
+	git clone http://git.confine-project.eu/confine/controller.git $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	git checkout $CONTROLLER_HASH
 	CONTROLLER_HASH=$(git rev-parse --short $CONTROLLER_HASH)
 	cd -
 	echo "/home/vct/confine-controller" > $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller.pth
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'python /home/vct/confine-dist/utils/vct/server/manage.py postupgradecontroller --from=$CONTROLLER_VERSION'
 }
+
 
 function install_node_firmware() {
 	echo "Updating node firmware to $NODEFIRMWARE_HASH"
@@ -133,8 +136,8 @@ function build_vct() {
 	clean_vct
 	update_vct
 	network_vct
-	update_controller
 	install_vct
+	update_controller
 	install_node_firmware
 	init_vct
 	stop_vct
