@@ -62,7 +62,7 @@ function clean_vct() {
 
 function network_vct() {
 	echo "Providing LXC with network connectivity..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'ifconfig eth0 143.129.77.137 netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8'
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'ifconfig eth0 143.129.77.138 netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8'
 }
 
 function install_vct(){
