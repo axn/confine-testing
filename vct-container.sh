@@ -89,6 +89,7 @@ function tar_xz_vct() {
     #tar
     id=$(date +%Y%m%d_%H%M%S);
 	name=vct-container,vct$VCT_HASH,controller$CONTROLLER_HASH,nodefw$NODEFIRMWARE_HASH.tar.xz
+	echo "Compressing with tar xz..."
     tar -c --xz -f ./$name vct
     cd -
 	mv $VCT_CONTAINER_DIR/$name ./dl/
