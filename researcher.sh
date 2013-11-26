@@ -37,7 +37,7 @@ function start_researcher(){
     fi
 	
 	echo "Adding firmware..."
-	wget https://media.confine-project.eu/misc/debianbt32.tgz -P researcher_lxc/rootfs/tmp/
+	wget -q https://media.confine-project.eu/misc/debianbt32.tgz -P researcher_lxc/rootfs/tmp/
 
 	echo "Starting LXC..."
 	lxc-start --name $RESEARCHER_LXC -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
