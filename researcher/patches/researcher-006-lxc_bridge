@@ -1,11 +1,13 @@
 Index: researcher/researcher_lxc/config
 ===================================================================
 --- researcher.orig/researcher_lxc/config	2013-10-29 11:55:15.000000000 +0100
-+++ researcher/researcher_lxc/config	2013-11-20 16:32:15.222976644 +0100
-@@ -33,5 +33,5 @@
++++ researcher/researcher_lxc/config	2013-11-26 09:39:50.401591254 +0100
+@@ -32,6 +32,6 @@
+ ## Network
  lxc.network.type                        = veth
  lxc.network.flags                       = up
- lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BF
+-lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BF
 -lxc.network.link                        = vmbr
-+lxc.network.link                        = vmbridge
++#lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BF
++lxc.network.link                        = newbridge
  lxc.network.name                        = eth0

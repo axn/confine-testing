@@ -1,13 +1,15 @@
 Index: vct/vct/config
 ===================================================================
---- vct.orig/vct/config	2013-11-20 16:28:13.322979466 +0100
-+++ vct/vct/config	2013-11-20 16:28:35.718979203 +0100
-@@ -76,7 +76,7 @@
+--- vct.orig/vct/config	2013-11-25 18:36:27.000000000 +0100
++++ vct/vct/config	2013-11-26 09:40:29.625589874 +0100
+@@ -75,8 +75,8 @@
+ ## Network
  lxc.network.type                        = veth
  lxc.network.flags                       = up
- lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
+-lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
 -lxc.network.link                        = vmbr
-+lxc.network.link                        = vmbridge
++#lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
++lxc.network.link                        = newbridge
  lxc.network.name                        = eth0
  
  ## Devices needed by VCT
