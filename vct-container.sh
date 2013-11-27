@@ -3,9 +3,9 @@
 
 function tear_down_vct_container(){
 	echo "Verify running $VCT_CONTAINER"
-    if lxc-info -n $VCT_CONTAINER | grep -q RUNNING; then
+    if lxc-info -n $VCT_CONTAINER_DIR | grep -q RUNNING; then
 		echo "Stopping LXC..."
-        lxc-stop -n $VCT_CONTAINER;
+        lxc-stop -n $VCT_CONTAINER_DIR;
     fi
 }
 
