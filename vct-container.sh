@@ -2,6 +2,7 @@
 #This script is used to create an updated vct container
 
 function tear_down_vct_container(){
+	echo "Verify running $VCT_CONTAINER"
     if lxc-info -n $VCT_CONTAINER | grep -q RUNNING; then
 		echo "Stopping LXC..."
         lxc-stop -n $VCT_CONTAINER;
@@ -20,7 +21,6 @@ function extract_vct(){
 	fi
 	
     echo "Unpacking..."
-	``
 	tear_down_vct_container
 	rm -rf $VCT_CONTAINER_DIR/vct
 	tar -C $VCT_CONTAINER_DIR --numeric-owner -xJf dl/$VCT_CONTAINER
