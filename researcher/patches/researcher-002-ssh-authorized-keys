@@ -12,3 +12,36 @@ Index: researcher/researcher_lxc/rootfs/home/vct/.ssh/authorized_keys
 @@ -0,0 +1,2 @@
 +ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxNRiCTU6LzSzpufzf6VfHbStLAB82JBds7kwMM2TpPxAYt6waD0vpXuBAah74K9epUlNxYv78Q+mOdzgCde5sqxU2NwzMZK1rBU+TMxp8kkvNHI9+QdXe6fwgDop6qPq22YqLDGsAOUQE8FCH3PPmWvqI+SeFRbvxPdQ9dCMub7swp/HKUXkV9uPGFGTMKWXQbF5yXs0Pjz0xTA4t4hrju9CsyTtdu36skBIh8547zuGPJnDO51jr5yNgT5MNQ8jrgexKdayYtnHybrK1uUxWL205txNu+N61Z7VTNvh0S+O2kaQ6T0ssx3UhkERbm+o+10JI0nExDlkR06v3/TLD CONFINE testing key
 +
+Index: researcher/researcher_lxc/rootfs/home/vct/.ssh/id_rsa
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ researcher/researcher_lxc/rootfs/home/vct/.ssh/id_rsa	2013-10-29 10:33:36.822668660 +0100
+@@ -0,0 +1,28 @@
++-----BEGIN RSA PRIVATE KEY-----
++MIIEpQIBAAKCAQEAsTUYgk1Oi80s6bn83+lXx20rSwAfNiQXbO5MDDNk6T8QGLes
++Gg9L6V7gQGoe+CvXqVJTcWL+/EPpjnc4AnXubKsVNjcMzGStawVPkzMafJJLzRyP
++fkHV3un8IA6Keqj6ttmKiwxrADlEBPBQh9zz5lr6iPknhUW78T3UPXQjLm+7MKfx
++ylF5FfbjxhRkzCll0Gxecl7ND489MUwOLeIa47vQrMk7Xbt+rJASIfOeO87hjyZw
++zudY6+cjYE+TDUPI64HsSnWsmLZx8m6ytblMVi9tObcTbvjetWe1Uzb4dEvjtpGk
++Ok9LLMd1IZBEW5vqPtdCSNJxMQ5ZEdOr9/0ywwIDAQABAoIBAQCRVK5JDwW/+gE/
++nl0ZddGbqJi85dizGl5r4/NSfkPgVuvomZn3tVvYhQr9SQslFS/FmdL9RudAFKJT
++SMsSmY10acr3r6Y7asYe4zgjzOGIEKNCEI5OScgRDWzNDZ/cgQE9PKQ27XRDtrNm
++KYCiLD+LSEn4U/5peotsifyqebjwtyuxDOwQ77FtJh+Fr3/qpFgClxKS/ErqNArl
++hYR+IXEw7U8f3Q2QGOwqb2ur/oUTQGcQgcLESlaJclKK5LTPpq2n5BPt/IVNxWSF
++WkF9mYEAGdSH0n+yCzn5Z7FxLt/0xKTpdWdUyGBVw9SHvCIO5ovEAv1O37h+49Xx
++BA53KqzhAoGBAOFHhOESBZsy5X/bAcRGKXP05ZNdGQRLh5NBZBw/ihs36qU8p+iT
++qpIHbzIsXLec3opuLy4smGozMyx5JfpJknTbH2vPUMTlNbCsIQQVHr+Fh4YdjwN7
++t5COTLqkb5sNxtMgmB/NCWENnX/G1U2AnkpoUD1FrA86hc1rC8/ZILSnAoGBAMlf
++Y5az70Nt8G1oMOlxnPBIAyOqHHiB4wWWlsFjdybZfdYn/7poL0+Vn0YjJq4khgUW
++SvpIx0ArVYFdvrK2HHNpQOUt7L5ZA0S4LqvT0ecEnas9uwL+CyjnQS8IeTVpi9H4
++q+CNIRT6blzdhK1M/oayRxNBFSmr3hWe/35oeOiFAoGBALXY63Ra/deHwCXy/XwY
++PsHxf5fy4IzNA0Vk1ZDP4YWTH3/+dHOTL27tPV883CMDJ8iKpN8a9HVVmwtdR8C/
++vs9BSh3WnZYyh6Jzb7tB6S4kdX9XQOhI56Zyl5FZxxVci5BFkUaqVdXYDbjlIa2M
++Ezpw9cRgB0HLtdJZhJFk7belAoGAHKMcHopoNEamMmjmy8wEbYdQKvo+IkUWa+0G
++c2oZv8SeSJ5Xl8LJN6AnjmnhTlKTXJXXA9DlxRJkjokuXWvYj/Ef8Xeee1NdS6CF
++wpnU9+2IHpogxkQqgh6g/ndOBXKFF88tYjmvwrP6jepSu/J/H9iqkupmgA6Y/qol
++22wwBaECgYEAlbTaUvXFbZST669/nDWI78ixP4fu/X8qyujyLiVxfxxkLldbYGDy
++yJXw63VWogL3xVWwKd2+QzYOqmkSiL0IIu00GP/ReK6BZWMw1QbgrM+VljDeyYkI
++kvq+8bAr737cV3h2lhE3/V2emaggZ8A82BnOuczYDNaLsY4WAkq5h8A=
++-----END RSA PRIVATE KEY-----
++

@@ -39,6 +39,9 @@ function start_researcher(){
 	echo "Adding firmware..."
 	wget -q https://media.confine-project.eu/misc/debianbt32.tgz -P researcher_lxc/rootfs/home/vct/
 	wget -q https://media.confine-project.eu/misc/vct-sliver-template-build-debian7.tgz -P researcher_lxc/rootfs/home/vct/
+	
+	echo "Adding overlays..."
+	wget -q https://media.confine-project.eu/misc/testingoverlay.tar.gz -P researcher_lxc/rootfs/home/vct/
 
 	echo "Starting LXC..."
 	lxc-start --name $RESEARCHER_LXC -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
