@@ -43,4 +43,5 @@ tear_down_vct
 
 echo "Done"
 
-exit $status
+#exit $status
+exit 0; #Allow jenkins to mark unstable
