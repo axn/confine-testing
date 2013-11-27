@@ -1,6 +1,12 @@
 #!/bin/bash
 #This script is used to create an updated vct container
 
+function tear_down_vct_container(){
+    if lxc-info -n $VCT_CONTAINER | grep -q RUNNING; then
+        lxc-stop -n $VCT_CONTAINER;
+    fi
+}
+
 function extract_vct(){
     # fetch/copy the latest VCT container
 	if [[ ! -f dl/$VCT_CONTAINER ]]; then
@@ -13,8 +19,8 @@ function extract_vct(){
 	fi
 	
     echo "Unpacking..."
-	
-	lxc-stop -n $VCT_CONTAINER_DIR
+	``
+	tear_down_vct_container
 	rm -rf $VCT_CONTAINER_DIR/vct
 	tar -C $VCT_CONTAINER_DIR --numeric-owner -xJf dl/$VCT_CONTAINER
 	
@@ -53,7 +59,7 @@ function start_vct() {
 
 function stop_vct(){
     echo "Stopping LXC..."
-    lxc-stop --name $VCT_CONTAINER_DIR
+    tear_down_vct_container
 }
 
 function clean_vct() {
