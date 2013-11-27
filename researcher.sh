@@ -8,7 +8,7 @@ function start_researcher(){
 	# fetch/copy the latest research container
 	if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
 		echo "Downloading $RESEARCH_CONTAINER"
-		wget --no-check-certificate $RESEARCH_CONTAINER_URL -O dl/$RESEARCH_CONTAINER
+		wget -q --no-check-certificate $RESEARCH_CONTAINER_URL -O dl/$RESEARCH_CONTAINER
 	fi
 	if [[ ! -f dl/$RESEARCH_CONTAINER ]]; then
 		echo "Could not download $RESEARCH_CONTAINER"
