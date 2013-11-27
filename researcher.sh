@@ -38,6 +38,7 @@ function start_researcher(){
 	
 	echo "Adding firmware..."
 	wget -q https://media.confine-project.eu/misc/debianbt32.tgz -P researcher_lxc/rootfs/home/vct/
+	wget -q https://media.confine-project.eu/misc/CONFINE-sliver-openwrt-x86-generic-rootfs-310812_1816.tar.gz -P researcher_lxc/rootfs/home/vct/
 
 	echo "Starting LXC..."
 	lxc-start --name $RESEARCHER_LXC -f researcher_lxc/config -s lxc.rootfs=$(pwd)/researcher_lxc/rootfs -d
