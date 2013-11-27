@@ -125,7 +125,7 @@ function install_node_firmware() {
 	for branch in testing master; do
 		URL=http://builds.confine-project.eu/confine/openwrt/x86/$branch-builds/$NODEFIRMWARE_HASH_LONG/images/CONFINE-openwrt-$branch-latest.img.gz
 		if wget -q --spider $URL; then
-			echo VCT_NODE_TEMPLATE_URL=\"$URL\" >> $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
+#			echo VCT_NODE_TEMPLATE_URL=\"$URL\" >> $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
 			#this should be changed
 			wget -q $URL -O $VCT_CONTAINER_DIR/vct/rootfs/var/lib/vct/downloads/CONFINE-owrt-master-atom-20130925-1614.img.gz
 			break;
