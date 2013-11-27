@@ -3,6 +3,7 @@
 
 function tear_down_vct_container(){
     if lxc-info -n $VCT_CONTAINER | grep -q RUNNING; then
+		echo "Stopping LXC..."
         lxc-stop -n $VCT_CONTAINER;
     fi
 }
@@ -55,11 +56,6 @@ function start_vct() {
     cd $VCT_CONTAINER_DIR
 	lxc-start --name $VCT_CONTAINER_DIR -f vct/config -s lxc.rootfs=$(pwd)/vct/rootfs -o vct.log -d
 	cd -
-}
-
-function stop_vct(){
-    echo "Stopping LXC..."
-    tear_down_vct_container
 }
 
 function clean_vct() {
@@ -157,7 +153,7 @@ function build_vct() {
 	update_controller
 	install_node_firmware
 	init_vct
-	stop_vct
+	tear_down_vct_container
 	tar_xz_vct
 }
 
