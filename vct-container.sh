@@ -69,10 +69,10 @@ function clean_vct() {
 
 function network_vct() {
 	echo "Providing LXC with network connectivity..."
-	if ! brctl show | grep vmbridge; then
+	if ! brctl show | grep -q vmbridge; then
     	brctl addbr vmbridge
 	fi
-	if ! brctl show vmbridge | grep eth1; then
+	if ! brctl show vmbridge | grep -q eth1; then
 		brctl addif vmbridge eth1
 	fi
     ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'ifconfig eth0 143.129.77.138 netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8'
