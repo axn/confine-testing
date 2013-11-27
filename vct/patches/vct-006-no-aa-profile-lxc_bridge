@@ -9,7 +9,7 @@ Index: vct/vct/config
 -lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
 -lxc.network.link                        = vmbr
 +#lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
-+lxc.network.link                        = newbridge
++lxc.network.link                        = vmbridge
  lxc.network.name                        = eth0
  
  ## Devices needed by VCT

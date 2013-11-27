@@ -9,5 +9,5 @@ Index: researcher/researcher_lxc/config
 -lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BF
 -lxc.network.link                        = vmbr
 +#lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BF
-+lxc.network.link                        = newbridge
++lxc.network.link                        = vmbridge
  lxc.network.name                        = eth0
