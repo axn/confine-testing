@@ -60,7 +60,7 @@ function tear_down_vct(){
     fi
 	if ip neigh show ${VCT_IP} dev ${LXC_NETWORK_LINK} | grep -q "${VCT_IP}"; then
 		ip neigh del ${VCT_IP} dev ${LXC_NETWORK_LINK}
-	fi`
+	fi
 }
 
 VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}
