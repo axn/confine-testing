@@ -82,9 +82,11 @@ function archive_researcher() {
 
 function tear_down_researcher(){
     if lxc-info -n $RESEARCHER_LXC | grep -q RUNNING; then
+		echo "Stopping researcher..."
         lxc-stop -n $RESEARCHER_LXC;
     fi
 	if ip neigh show ${RESEARCHER_IP} dev ${LXC_NETWORK_LINK} | grep -q "${RESEARCHER_IP}"; then
+		echo "Removing ${RESEARCHER_IP} from arp cache..."
 		ip neigh del ${RESEARCHER_IP} dev ${LXC_NETWORK_LINK}
 	fi
 }

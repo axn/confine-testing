@@ -56,9 +56,11 @@ function archive_vct() {
 
 function tear_down_vct(){
     if lxc-info -n $VCT_LXC | grep -q RUNNING; then
+		echo "Stopping vct..."
         lxc-stop -n $VCT_LXC;
     fi
 	if ip neigh show ${VCT_IP} dev ${LXC_NETWORK_LINK} | grep -q "${VCT_IP}"; then
+		echo "Removing ${VCT_IP} from arp cache..."
 		ip neigh del ${VCT_IP} dev ${LXC_NETWORK_LINK}
 	fi
 }
