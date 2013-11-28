@@ -17,17 +17,5 @@ function configure_network(){
     return 0
 }
 
-function offset_ips(){
-	IPOFFSET=${IPOFFSET:-0};
-	VCT_IP=${IPPREFIX}$((2+${IPOFFSET}));
-	RESEARCHER_IP=${IPPREFIX}$((3+${IPOFFSET}));
-	echo "vct container on $VCT_IP, researcher container on $RESEARCHER_IP"
-	echo "Updating patches to IP offset $IPOFFSET"
-	git checkout */patches
-	find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::2/${VCT_IP}/g" {} \;
-	find */patches/ -type f -exec sed -i "s/fdf6:1e51:5f7b:b50c::3/${RESEARCHER_IP}/g" {} \;
-	find */patches/ -type f -exec sed -i "s/vmbridge/${LXC_NETWORK_LINK}/g" {} \;
-}
-
 LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};

@@ -61,4 +61,6 @@ function tear_down_vct(){
 }
 
 VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}
-VCT_IP=fdf6:1e51:5f7b:b50c::2
+IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
+VCT_IP=${IPPREFIX}2
+

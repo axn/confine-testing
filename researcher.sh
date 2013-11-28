@@ -87,4 +87,6 @@ function tear_down_researcher(){
 }
 
 RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}
-RESEARCHER_IP=fdf6:1e51:5f7b:b50c::3
+IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
+RESEARCHER_IP=${IPPREFIX}3
+

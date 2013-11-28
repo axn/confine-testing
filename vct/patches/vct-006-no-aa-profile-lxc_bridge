@@ -6,9 +6,8 @@ Index: vct/vct/config
  ## Network
  lxc.network.type                        = veth
  lxc.network.flags                       = up
--lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
+ lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
 -lxc.network.link                        = vmbr
-+#lxc.network.hwaddr                      = 52:C0:CA:FE:BA:BE
 +lxc.network.link                        = vmbridge
  lxc.network.name                        = eth0
  

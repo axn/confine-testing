@@ -60,7 +60,7 @@ function start_vct() {
 
 function clean_vct() {
 	echo "Cleaning VCT installation..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 '/home/vct/confine-dist/utils/vct/vct_system_cleanup && sudo rm -rf /var/lib/vct' > $VCT_CONTAINER_DIR/vct_system_cleanup.log 2>&1
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_cleanup && sudo rm -rf /var/lib/vct' > $VCT_CONTAINER_DIR/vct_system_cleanup.log 2>&1
 }
 
 function network_vct() {
@@ -71,22 +71,22 @@ function network_vct() {
 	if ! brctl show vmbridge | grep -q eth1; then
 		brctl addif vmbridge eth1
 	fi
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@fdf6:1e51:5f7b:b50c::2 'ifconfig eth0 143.129.77.138 netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8'
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} 'ifconfig eth0 143.129.77.138 netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8'
 }
 
 function install_vct(){
 	echo "Installing VCT..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 '/home/vct/confine-dist/utils/vct/vct_system_install && sudo apt-get clean' > $VCT_CONTAINER_DIR/vct_system_install.log 2>&1
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_install && sudo apt-get clean' > $VCT_CONTAINER_DIR/vct_system_install.log 2>&1
 }
 
 function init_vct(){
 	echo "Initialising VCT..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 '/home/vct/confine-dist/utils/vct/vct_system_init' > $VCT_CONTAINER_DIR/vct_system_init.log 2>&1
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_init' > $VCT_CONTAINER_DIR/vct_system_init.log 2>&1
 }
 
 function build_node_vct() {
 	echo "Building node firmware..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 '/home/vct/confine-dist/utils/vct/vct_build_node_base_image'
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_build_node_base_image'
 }
 
 function tar_xz_vct() {
@@ -106,7 +106,7 @@ function tar_xz_vct() {
 
 function update_controller() {
 	echo "Updating controller to $CONTROLLER_HASH"
-	CONTROLLER_VERSION=$(ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'python /home/vct/confine-dist/utils/vct/server/manage.py controllerversion')
+	CONTROLLER_VERSION=$(ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} 'python /home/vct/confine-dist/utils/vct/server/manage.py controllerversion')
 	rm -rf $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller
 	git clone http://git.confine-project.eu/confine/controller.git $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
 	cd $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller
@@ -116,7 +116,7 @@ function update_controller() {
 	echo "/home/vct/confine-controller" > $VCT_CONTAINER_DIR/vct/rootfs/usr/local/lib/python2.7/dist-packages/controller.pth
 	# use the newest controller-admin
 	cp $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-controller/controller/bin/controller-admin.sh $VCT_CONTAINER_DIR/vct/rootfs/usr/local/bin/
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@fdf6:1e51:5f7b:b50c::2 'cd /home/vct/confine-dist/utils/vct/server/ && sudo python ./manage.py postupgradecontroller --from=$CONTROLLER_VERSION' > $VCT_CONTAINER_DIR/vct_update_controller.log 2>&1
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} 'cd /home/vct/confine-dist/utils/vct/server/ && sudo python ./manage.py postupgradecontroller --from=$CONTROLLER_VERSION' > $VCT_CONTAINER_DIR/vct_update_controller.log 2>&1
 }
 
 
@@ -160,3 +160,6 @@ function build_vct() {
 function build_vct_testing() {
 	build_vct origin/testing origin/master origin/testing
 }
+
+IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
+VCT_IP=${IPPREFIX}2
