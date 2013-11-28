@@ -84,6 +84,9 @@ function tear_down_researcher(){
     if lxc-info -n $RESEARCHER_LXC | grep -q RUNNING; then
         lxc-stop -n $RESEARCHER_LXC;
     fi
+	if ip neigh show ${RESEARCHER_IP} dev ${LXC_NETWORK_LINK} | grep -q "${RESEARCHER_IP}"; then
+		ip neigh del ${RESEARCHER_IP} dev ${LXC_NETWORK_LINK}
+	fi`
 }
 
 RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}

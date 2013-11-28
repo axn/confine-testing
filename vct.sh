@@ -58,6 +58,9 @@ function tear_down_vct(){
     if lxc-info -n $VCT_LXC | grep -q RUNNING; then
         lxc-stop -n $VCT_LXC;
     fi
+	if ip neigh show ${VCT_IP} dev ${LXC_NETWORK_LINK} | grep -q "${VCT_IP}"; then
+		ip neigh del ${VCT_IP} dev ${LXC_NETWORK_LINK}
+	fi`
 }
 
 VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}

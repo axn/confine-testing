@@ -7,6 +7,9 @@ function tear_down_vct_container(){
 		echo "Stopping LXC..."
         lxc-stop -n $VCT_CONTAINER_DIR;
     fi
+	if ip neigh show ${VCT_IP} dev ${LXC_NETWORK_LINK} | grep -q "${VCT_IP}"; then
+		ip neigh del ${VCT_IP} dev ${LXC_NETWORK_LINK}
+	fi`
 }
 
 function extract_vct(){
