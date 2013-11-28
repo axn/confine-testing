@@ -143,6 +143,9 @@ function build_vct() {
 	NODEFIRMWARE_HASH=$3
 	
 	mkdir -p $VCT_CONTAINER_DIR
+	
+	ip neigh flush dev ${LXC_NETWORK_LINK}
+	
 	extract_vct
 	start_vct
 	sleep 10
@@ -160,6 +163,6 @@ function build_vct() {
 function build_vct_testing() {
 	build_vct origin/testing origin/master origin/testing
 }
-
+LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
 VCT_IP=${IPPREFIX}2
