@@ -1,5 +1,6 @@
 function configure_network(){
 	if brctl show | grep -q $LXC_NETWORK_LINK; then
+		ip link set dev $LXC_NETWORK_LINK down
 		brctl delbr $LXC_NETWORK_LINK
 	fi
 	if ! brctl show | grep -q $LXC_NETWORK_LINK; then
@@ -12,7 +13,8 @@ function configure_network(){
     fi
     echo "Set $LXC_NETWORK_LINK up..."
     ip link set dev $LXC_NETWORK_LINK up;
-    
+	brctl addif $LXC_NETWORK_LINK eth1
+	
     if ! ip -6 addr show dev $LXC_NETWORK_LINK | grep ${IPPREFIX}1/64 > /dev/null 2>&1; then
         echo "Configure $LXC_NETWORK_LINK..."
         ip -6 addr add ${IPPREFIX}1/64 dev $LXC_NETWORK_LINK
