@@ -9,6 +9,7 @@ function configure_network(){
 	else
 		ip neigh flush dev ${LXC_NETWORK_LINK}
     fi
+	brctl setageing ${LXC_NETWORK_LINK} 5
     echo "Set $LXC_NETWORK_LINK up..."
     ip link set dev $LXC_NETWORK_LINK up;
     

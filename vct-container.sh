@@ -151,6 +151,7 @@ function build_vct() {
 	mkdir -p $VCT_CONTAINER_DIR
 	
 	ip neigh flush dev ${LXC_NETWORK_LINK}
+	brctl setageing ${LXC_NETWORK_LINK} 5
 	
 	extract_vct
 	start_vct
