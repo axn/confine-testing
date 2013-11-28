@@ -85,13 +85,6 @@ function tear_down_researcher(){
 		echo "Stopping researcher..."
         lxc-stop -n $RESEARCHER_LXC;
     fi
-	echo "Removing ${RESEARCHER_IP} from arp cache..."
-	if ip neigh show ${RESEARCHER_IP} dev ${LXC_NETWORK_LINK} | grep -q "${RESEARCHER_IP}"; then
-		ip neigh del ${RESEARCHER_IP} dev ${LXC_NETWORK_LINK}
-	fi
-	if ip neigh show ${RESEARCHER_IP} dev eth0 | grep -q "${RESEARCHER_IP}"; then
-		ip neigh del ${RESEARCHER_IP} dev eth0
-	fi
 }
 
 RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}

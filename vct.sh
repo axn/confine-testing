@@ -59,13 +59,6 @@ function tear_down_vct(){
 		echo "Stopping vct..."
         lxc-stop -n $VCT_LXC;
     fi
-	echo "Removing ${VCT_IP} from arp cache..."
-	if ip neigh show ${VCT_IP} dev ${LXC_NETWORK_LINK} | grep -q "${VCT_IP}"; then
-		ip neigh del ${VCT_IP} dev ${LXC_NETWORK_LINK}
-	fi
-	if ip neigh show ${VCT_IP} dev eth0 | grep -q "${VCT_IP}"; then
-		ip neigh del ${VCT_IP} dev eth0
-	fi
 }
 
 VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}

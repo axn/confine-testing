@@ -7,12 +7,6 @@ function tear_down_vct_container(){
 		echo "Stopping LXC..."
         lxc-stop -n $VCT_CONTAINER_DIR;
     fi
-	if ip neigh show ${VCT_IP} dev ${LXC_NETWORK_LINK} | grep -q "${VCT_IP}"; then
-		ip neigh del ${VCT_IP} dev ${LXC_NETWORK_LINK}
-	fi
-	if ip neigh show ${VCT_IP} dev eth0 | grep -q "${VCT_IP}"; then
-		ip neigh del ${VCT_IP} dev eth0
-	fi
 }
 
 function extract_vct(){
@@ -27,7 +21,6 @@ function extract_vct(){
 	fi
 	
     echo "Unpacking..."
-	tear_down_vct_container
 	rm -rf $VCT_CONTAINER_DIR/vct
 	tar -C $VCT_CONTAINER_DIR --numeric-owner -xJf dl/$VCT_CONTAINER
 	
@@ -148,11 +141,12 @@ function build_vct() {
 	CONTROLLER_HASH=$2
 	NODEFIRMWARE_HASH=$3
 	
+	. ./host.sh
+	configure_network
+	
 	mkdir -p $VCT_CONTAINER_DIR
-	
-	ip neigh flush dev ${LXC_NETWORK_LINK}
-	brctl setageing ${LXC_NETWORK_LINK} 5
-	
+
+	tear_down_vct_container
 	extract_vct
 	start_vct
 	sleep 10

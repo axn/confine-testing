@@ -1,15 +1,15 @@
 function configure_network(){
-	if ! brctl show | grep $LXC_NETWORK_LINK > /dev/null 2>&1; then
+	if brctl show | grep -q $LXC_NETWORK_LINK; then
+		brctl delbr $LXC_NETWORK_LINK
+	fi
+	if ! brctl show | grep -q $LXC_NETWORK_LINK; then
         echo "Bridge $LXC_NETWORK_LINK does not exist, creating bridge..."
         if ip link show $LXC_NETWORK_LINK > /dev/null 2>&1; then
             echo "Interface $LXC_NETWORK_LINK exists but is not a bridge."
             return 1;
         fi
         brctl addbr $LXC_NETWORK_LINK;
-	else
-		ip neigh flush dev ${LXC_NETWORK_LINK}
     fi
-	brctl setageing ${LXC_NETWORK_LINK} 5
     echo "Set $LXC_NETWORK_LINK up..."
     ip link set dev $LXC_NETWORK_LINK up;
     
