@@ -19,7 +19,6 @@ echo "Using vct: $VCT_CONTAINER"
 echo "Using researcher: $RESEARCH_CONTAINER"
 
 configure_network
-offset_ips
 
 start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
 start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
