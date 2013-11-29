@@ -90,4 +90,4 @@ function tear_down_researcher(){
 RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
 RESEARCHER_IP=${IPPREFIX}3
-
+RESEARCHER_IP_PUBLIC=${RESEARCHER_IP_PUBLIC:-143.129.77.139}

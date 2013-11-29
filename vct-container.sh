@@ -70,7 +70,7 @@ function network_vct() {
 	if ! brctl show vmbridge | grep -q eth1; then
 		brctl addif vmbridge eth1
 	fi
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} 'ifconfig eth0 143.129.77.138 netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8'
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} "ifconfig eth0 $VCT_IP_PUBLIC netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8"
 }
 
 function install_vct(){
@@ -167,3 +167,4 @@ function build_vct_testing() {
 LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
 VCT_IP=${IPPREFIX}2
+VCT_IP_PUBLIC=${VCT_IP_PUBLIC:-143.129.77.140}
