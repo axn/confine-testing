@@ -134,7 +134,7 @@ function install_node_firmware() {
 
 function build_vct() {
 	VCT_CONTAINER=vct,20131104.tar.xz
-	VCT_CONTAINER_URL=https://media.confine-project.eu/vct-container/$VCT_CONTAINER
+	VCT_CONTAINER_URL=https://media.confine-project.eu/vct-container/test/$VCT_CONTAINER
 	VCT_CONTAINER_DIR="vct-container"
 	
 	VCT_HASH=$1
