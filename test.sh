@@ -4,7 +4,7 @@
 # lots of work to do
 
 # URLs
-VCT_CONTAINER=${VCT_CONTAINER:-vct-container,vctffb4d14,controllerb55b35f,nodefwffb4d14.tar.xz}
+VCT_CONTAINER=${VCT_CONTAINER:-vct-container,vct016464d,controller7022f77,nodefw016464d.tar.xz}
 VCT_CONTAINER_URL=https://media.confine-project.eu/vct-container/test/$VCT_CONTAINER
 RESEARCH_CONTAINER=${RESEARCH_CONTAINER:-researcher,20131126.tar.xz}
 RESEARCH_CONTAINER_URL=https://media.confine-project.eu/researcher-container/$RESEARCH_CONTAINER
