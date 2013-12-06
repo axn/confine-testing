@@ -58,7 +58,7 @@ function run_tests(){
     sleep 20
     echo "Starting tests..."
     ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$RESEARCHER_IP \
-        "env CONFINE_SERVER_API='http://vctserver/api' CONFINE_USER='vct' CONFINE_PASSWORD='vct'  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/"
+        "env CONFINE_SERVER_API='http://vctserver/api' CONFINE_USER='vct' CONFINE_PASSWORD='vct'  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/ -v"
     return $?
 }
 
