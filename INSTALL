@@ -1,14 +1,68 @@
-Requirements:
+How to
+======
 
-internet access :-)
-quilt
-ssh
+The minimal requirements to run the tests are the following:
+
+Internet access
+quilt software
+ssh software
 IPv6 support
-LXC
+LXC enabled kernel
 mounted cgroup
-git
+git software
 
-optional variables
-VCT_LXC: name of vct lxc (default: vct_<timestamp>)
-RESEARCHER_LXC: name of researcher lxc (default: researcher_<timestamp>)
-IPOFFSET: offset of used ip addresses (default: 0)
+The first step is to checkout the confine-testing repository:
+
+$ git clone http://git.confine-project.eu/confine/confine-testing.git confine-testing
+
+This repository includes all the necessary scripts to create the VCT and researcher LXC containers.
+
+Then cd into this directory:
+
+$ cd confine-testing
+
+The test.sh script uses a few variables which can be set or the default values can be used. The variables are:
+
+* VCT_CONTAINER: this defines the version of the VCT container to be used for testing: currently this is set to vct-container,vctffb4d14,controllerb55b35f,nodefwffb4d14.tar.xz by default. The list of available containers can be found at http://media.confine-project.eu/vct-container/test/.
+* VCT_LXC: this is the name of the VCT container. Default vct_$(date -u +%s)
+* RESEARCHER_LXC: this is the name of the researcher container. Default researcher_$(date -u +%s)
+* SETUP_ONLY: when set to y, the script will only set up the VCT and researcher containers and then exit. This way, lxc-console for the researcher can be used to manually start a test. Default n.
+* NO_TEARDOWN: when set to y, the script will not teardown the VCT and researcher containers. This allows for further investigation after the tests. Default n.
+
+This can be used as follows:
+
+$ sudo bash -c "\
+export VCT_CONTAINER=vct-container,vctffb4d14,controllerb55b35f,nodefwffb4d14.tar.xz; \
+export VCT_LXC=vct; \
+export RESEARCHER_LXC=researcher; \
+bash test.sh"
+
+The script will download, unpack, patch and start the VCT container provided by the VCT_CONTAINER variable. It will then download the researcher container and unpack, patch and start it. The CONFINE tests and utilities are automatically donwloaded. It will then ssh into the researcher and execute the tests. All this takes a while. After the tests are done, the VCT and researcher containers are stopped.
+
+The IP address of the VCT container is default fdf6:1e51:5f7b:b50c::2/64, for the researcher container fdf6:1e51:5f7b:b50c::3/64 and for the bridge (vmbridge) on the main host fdf6:1e51:5f7b:b50c::1/64.
+
+Run tests manually
+==================
+
+Make sure that the testing framework is set up using:
+
+$ sudo bash -c "\
+export VCT_CONTAINER=vct-container,vctffb4d14,controllerb55b35f,nodefwffb4d14.tar.xz; \
+export VCT_LXC=vct; \
+export RESEARCHER_LXC=researcher; \
+export SETUP_ONLY=y; \
+bash test.sh"
+
+Entering the VCT and researcher LXC containers is done by using their name defined by VCT_LXC and RESEARCHER_LXC. The login:“vct”, the password:“confine” without the quotes.
+
+$ lxc-console -n $VCT_LXC
+$ lxc-console -n $RESEARCHER_LXC
+
+When running the tests in the researcher container, the following command can be used to run all the tests:
+
+$ env CONFINE_SERVER_API='http://vctserver/api' CONFINE_USER='vct' CONFINE_PASSWORD='vct'  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/
+
+For a specific test, the following command can be used:
+
+$ env CONFINE_SERVER_API='http://vctserver/api' CONFINE_USER='vct' CONFINE_PASSWORD='vct'  PYTHONPATH=confine-utils:confine-tests python . ./confine-tests/confine/tests/test_group.py
+
