@@ -63,8 +63,7 @@ function clean_vct() {
 }
 
 function network_vct() {
-	configure_network
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} "ifconfig eth0 $VCT_IP_PUBLIC netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8"
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} "ifconfig eth0 $VCT_IP_PUBLIC netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8"
 }
 
 function install_vct(){
