@@ -13,7 +13,10 @@ function configure_network(){
     fi
     echo "Set $LXC_NETWORK_LINK up..."
     ip link set dev $LXC_NETWORK_LINK up;
-	brctl addif $LXC_NETWORK_LINK eth1
+	for i in $EXTRA_IFACES; do
+		echo "Adding $i to $LXC_NETWORK_LINK"
+		brctl addif $LXC_NETWORK_LINK $i
+	done
 	
     if ! ip -6 addr show dev $LXC_NETWORK_LINK | grep ${IPPREFIX}1/64 > /dev/null 2>&1; then
         echo "Configure $LXC_NETWORK_LINK..."
@@ -24,3 +27,4 @@ function configure_network(){
 
 LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
+EXTRA_IFACES=${EXTRA_IFACES:-""}
