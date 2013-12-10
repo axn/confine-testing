@@ -33,7 +33,9 @@ function configure_masquerade() {
 	fi
 	
 	echo 1 > /proc/sys/net/ipv4/ip_forward
-	iptables -t nat -D POSTROUTING -o ${OUT_IFACE} -j MASQUERADE
+	if [ iptables -t nat -D POSTROUTING -o ${OUT_IFACE} -j MASQUERADE ]; then
+		echo "Removed previous MASQ rule..."
+	fi
 	iptables -t nat -A POSTROUTING -o ${OUT_IFACE} -j MASQUERADE
 }
 
