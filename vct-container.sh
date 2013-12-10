@@ -62,9 +62,13 @@ function clean_vct() {
     ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_cleanup && sudo rm -rf /var/lib/vct' > $VCT_CONTAINER_DIR/vct_system_cleanup.log 2>&1
 }
 
-function network_vct() {
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} "ifconfig eth0 $VCT_IP_PUBLIC netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8"
+function configure_inet() {
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} "sudo ip addr add ${IPV4PREFIX}2/24 dev eth0 && sudo ip route add default via ${IPV4PREFIX}1 && ping -c 1 8.8.8.8";
 }
+
+# function network_vct() {
+# 	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@${VCT_IP} "ifconfig eth0 $VCT_IP_PUBLIC netmask 255.255.255.224; route add default gw 143.129.77.158; ping -c 1 8.8.8.8"
+# }
 
 function install_vct(){
 	echo "Installing VCT..."
@@ -136,6 +140,7 @@ function build_vct() {
 	
 	. ./host.sh
 	configure_network
+	configure_masquerade
 	
 	mkdir -p $VCT_CONTAINER_DIR
 
@@ -145,7 +150,8 @@ function build_vct() {
 	sleep 10
 	clean_vct
 	update_vct
-	network_vct
+	#network_vct
+	configure_inet
 	install_vct
 	update_controller
 	install_node_firmware
@@ -161,4 +167,4 @@ LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
 VCT_IP=${IPPREFIX}2
 VCT_IP_PUBLIC=${VCT_IP_PUBLIC:-143.129.77.140}
-EXTRA_IFACES=${EXTRA_IFACES:-"eth1"}
+OUT_IFACE=${OUT_IFACE:-"eth0"}

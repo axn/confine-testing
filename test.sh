@@ -26,6 +26,10 @@ configure_network
 start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
 start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL
 
+configure_masquerade
+configure_vct_inet
+configure_researcher_inet
+
 if [ "${SETUP_ONLY}" == "y" ]; then
 	exit 0;
 fi

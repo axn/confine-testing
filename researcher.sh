@@ -47,6 +47,11 @@ function start_researcher(){
 	cd ..
 }
 
+function configure_researcher_inet() {
+	echo "Providing researcher with inet..."
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@$RESEARCHER_IP "ip addr add ${IPV4PREFIX}3/24 dev eth0 && ip route add default via ${IPV4PREFIX}1 && ping -c 1 8.8.8.8";
+}
+
 
 function run_tests(){
 	echo "SSHing..."
@@ -83,4 +88,3 @@ function tear_down_researcher(){
 RESEARCHER_LXC=${RESEARCHER_LXC:-researcher_$(date -u +"%s")}
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
 RESEARCHER_IP=${IPPREFIX}3
-RESEARCHER_IP_PUBLIC=${RESEARCHER_IP_PUBLIC:-143.129.77.139}

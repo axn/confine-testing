@@ -43,6 +43,11 @@ function start_vct (){
 
 }
 
+function configure_vct_inet() {
+	echo "Providing vct with inet..."
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$VCT_IP "sudo ip addr add ${IPV4PREFIX}2/24 dev eth0 &&  sudo ip route add default via ${IPV4PREFIX}1 && ping -c 1 8.8.8.8";
+}
+
 function archive_vct() {
     lxc-stop -n $VCT_LXC;
     id=$(date +%Y%m%d_%H%M%S);
@@ -64,4 +69,3 @@ function tear_down_vct(){
 VCT_LXC=${VCT_LXC:-vct_$(date -u +"%s")}
 IPPREFIX=${IPPREFIX:-"fdf6:1e51:5f7b:b50c::"};
 VCT_IP=${IPPREFIX}2
-VCT_IP_PUBLIC=${VCT_IP_PUBLIC:-143.129.77.138}
