@@ -45,9 +45,9 @@ function start_researcher(){
 	echo "Pinging..."
 	ping6 -c 1 $RESEARCHER_IP && echo "ok"
 	
+	cd ..
 	echo "Fixing permissions..."
 	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@$RESEARCHER_IP "chown -R vct /home/vct/"
-	cd ..
 }
 
 function configure_researcher_inet() {
