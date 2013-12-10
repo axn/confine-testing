@@ -13,6 +13,7 @@ NO_TEARDOWN=${NO_TEARDOWN:-n}
 
 set -e # fail on any exception
 
+. ./setup.conf
 . ./host.sh
 . ./vct.sh
 . ./researcher.sh
