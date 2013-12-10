@@ -33,6 +33,7 @@ function configure_masquerade() {
 	fi
 	
 	echo 1 > /proc/sys/net/ipv4/ip_forward
+	iptables -t nat -D POSTROUTING -o ${OUT_IFACE} -j MASQUERADE
 	iptables -t nat -A POSTROUTING -o ${OUT_IFACE} -j MASQUERADE
 }
 
