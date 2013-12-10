@@ -33,11 +33,11 @@ function configure_masquerade() {
 	fi
 	
 	echo 1 > /proc/sys/net/ipv4/ip_forward
-	if iptables -t nat -D POSTROUTING -o ${OUT_IFACE} -s ${IPV4PREFIX}/24 -j MASQUERADE; then
+	if iptables -t nat -D POSTROUTING -o ${OUT_IFACE} -s ${IPV4PREFIX}0/24 -j MASQUERADE; then
 		echo "Removed previous MASQ rule..."
 	fi
 	echo "Adding MASQ rule for ${OUT_IFACE}"
-	iptables -t nat -A POSTROUTING -o ${OUT_IFACE} -s ${IPV4PREFIX}/24 -j MASQUERADE
+	iptables -t nat -A POSTROUTING -o ${OUT_IFACE} -s ${IPV4PREFIX}0/24 -j MASQUERADE
 }
 
 LXC_NETWORK_LINK=${LXC_NETWORK_LINK:-"vmbridge"};
