@@ -36,6 +36,7 @@ function configure_masquerade() {
 	if iptables -t nat -D POSTROUTING -o ${OUT_IFACE} -j MASQUERADE; then
 		echo "Removed previous MASQ rule..."
 	fi
+	echo "Adding MASQ rule for ${OUT_IFACE}"
 	iptables -t nat -A POSTROUTING -o ${OUT_IFACE} -j MASQUERADE
 }
 
