@@ -68,7 +68,15 @@ function run_tests(){
     # ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$RESEARCHER_IP \
 #         "env CONFINE_SERVER_API='http://vctserver/api' CONFINE_USER='vct' CONFINE_PASSWORD='vct'  PYTHONPATH=confine-utils:confine-tests python -m unittest discover -s ./confine-tests/ -v"
     ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$RESEARCHER_IP \
-        "env CONFINE_SERVER_API='http://vctserver/api' CONFINE_USER='vct' CONFINE_PASSWORD='vct'  PYTHONPATH=confine-utils:confine-tests ./confine-tests/discover.py discover -s ./confine-tests/ -v"
+        "env \
+			TEST_API=$TEST_API \
+			TEST_VCT=$TEST_VCT \
+			TEST_INTEGRATION=$TEST_INTEGRATION \
+			CONFINE_SERVER_API='http://vctserver/api' \
+			CONFINE_USER='vct' \
+			CONFINE_PASSWORD='vct'  \
+			PYTHONPATH=confine-utils:confine-tests \
+			./confine-tests/discover.py discover -s ./confine-tests/ -v"
     return $?
 }
 
