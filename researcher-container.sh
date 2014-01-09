@@ -50,7 +50,7 @@ function tar_xz_researcher() {
     quilt pop -a -v -f
     #tar
     id=$(date +%Y%m%d_%H%M%S);
-	name=research-container,$id.tar.xz
+	name=researcher,$id.tar.xz
 	echo "Compressing with tar xz..."
     tar -c --xz -f ./$name researcher_lxc
     cd -
