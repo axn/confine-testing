@@ -1,6 +1,13 @@
 #!/bin/bash
 #This script is used to create a research container
 
+#how to use:
+
+# source researcher-container.sh; #read all the functions
+# run_researcher #starts the researcher lxc and configures it
+# ssh vct@$RESEARCHER_IP #log in the researcher and preform your update
+# stop_researcher #stops the researcher and creates a tar.xz of the rootfs
+
 function tear_down_researcher_container(){
 	echo "Verify running $RESEARCHER_CONTAINER_DIR..."
     if lxc-info -n $RESEARCHER_CONTAINER_DIR | grep -q RUNNING; then
