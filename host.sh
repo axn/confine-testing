@@ -37,7 +37,7 @@ function configure_masquerade() {
 		echo "Removed previous MASQ rule..."
 	fi
 	echo "Clearing conntrack table..."
-	conntrack -F -s ${IPV4PREFIX}0/24
+	conntrack -F
 	echo "Adding MASQ rule for ${OUT_IFACE}"
 	iptables -t nat -A POSTROUTING -o ${OUT_IFACE} -s ${IPV4PREFIX}0/24 -j MASQUERADE
 }
