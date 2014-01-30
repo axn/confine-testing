@@ -2,6 +2,7 @@ function start_researcher(){
 	
 	RESEARCH_CONTAINER=$1
 	RESEARCH_CONTAINER_URL=$2
+	CONFINE_TESTS_URL=$3
 
 	SLEEP=5
 	
@@ -31,7 +32,7 @@ function start_researcher(){
 	
 	echo "Adding tests..."
 	git clone http://git.confine-project.eu/confine/confine-utils.git researcher_lxc/rootfs/home/vct/confine-utils
-	git clone http://git.confine-project.eu/confine/confine-tests.git researcher_lxc/rootfs/home/vct/confine-tests
+	git clone $CONFINE_TESTS_URL researcher_lxc/rootfs/home/vct/confine-tests
     if [[ $? != 0 ]]; then
         echo "Could not fetch the tests."
     fi
