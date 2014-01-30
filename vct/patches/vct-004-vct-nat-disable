@@ -5,5 +5,5 @@ Index: vct/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
 @@ -1,2 +1,4 @@
  VCT_KERNEL_MODULES=
  VCT_SUDO_ASK=NO
-+VCT_BR00_V4_NAT_OUT_DEV=""
++#VCT_BR00_V4_NAT_OUT_DEV=""
 +

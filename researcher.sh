@@ -53,7 +53,7 @@ function start_researcher(){
 
 function configure_researcher_inet() {
 	echo "Providing researcher with inet..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@$RESEARCHER_IP "ip addr add ${IPV4PREFIX}3/24 dev eth0 && ip route add default via ${IPV4PREFIX}1 && ping -c 1 8.8.8.8";
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no root@$RESEARCHER_IP "ip addr add ${IPV4PREFIX}3/24 dev eth0 && ip route add default via ${IPV4PREFIX}1 && sleep 5 && ping -c 5 8.8.8.8";
 }
 
 

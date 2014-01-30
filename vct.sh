@@ -45,7 +45,7 @@ function start_vct (){
 
 function configure_vct_inet() {
 	echo "Providing vct with inet..."
-	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$VCT_IP "sudo ip addr add ${IPV4PREFIX}2/24 dev eth0 &&  sudo ip route add default via ${IPV4PREFIX}1 && ping -c 5 8.8.8.8";
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$VCT_IP "sudo ip addr add ${IPV4PREFIX}2/24 dev eth0 &&  sudo ip route add default via ${IPV4PREFIX}1 && sleep 5 && ping -c 5 8.8.8.8";
 }
 
 function archive_vct() {
