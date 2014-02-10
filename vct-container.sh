@@ -37,16 +37,13 @@ function update_vct() {
 	CDDIR=$VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
 	mv $CDDIR/utils/vct/vct.conf.overrides /tmp/
 	rm -rf $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist
-    git clone http://git.confine-project.eu/confine.git $CDDIR
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} "cd /home/vct && git clone http://git.confine-project.eu/confine.git confine-dist && cd confine-dist && git fetch origin && git checkout -b testthis $VCT_HASH && git log -n1" > $VCT_CONTAINER_DIR/update_vct.log 2>&1
+	mv /tmp/vct.conf.overrides $CDDIR/utils/vct/
+
 	cd $CDDIR
-	git checkout $VCT_HASH
-	mv /tmp/vct.conf.overrides ./utils/vct/
-	
 	VCT_HASH=$(git rev-parse --short $VCT_HASH)
-	if ! [ ${#NODEFIRMWARE_HASH} -eq 40 ]; then
-		NODEFIRMWARE_HASH=$(git rev-parse --short $NODEFIRMWARE_HASH)
-		NODEFIRMWARE_HASH_LONG=$(git rev-parse $NODEFIRMWARE_HASH)
-	fi
+	NODEFIRMWARE_HASH=$(git rev-parse --short $NODEFIRMWARE_HASH)
+	NODEFIRMWARE_HASH_LONG=$(git rev-parse $NODEFIRMWARE_HASH)
 	cd -
 }
 
@@ -57,9 +54,14 @@ function start_vct() {
 	cd -
 }
 
+function vct_error() {
+	echo "Testing vct error case..."
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} 'ls -l /asdfas' > $VCT_CONTAINER_DIR/vct_error.log 2>&1
+}
+
 function clean_vct() {
 	echo "Cleaning VCT installation..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_cleanup && sudo rm -rf /var/lib/vct' > $VCT_CONTAINER_DIR/vct_system_cleanup.log 2>&1
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_cleanup && sudo rm -rfv /var/lib/vct' > $VCT_CONTAINER_DIR/vct_system_cleanup.log 2>&1
 }
 
 function configure_inet() {
@@ -72,7 +74,7 @@ function configure_inet() {
 
 function install_vct(){
 	echo "Installing VCT..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_install && sudo apt-get clean' > $VCT_CONTAINER_DIR/vct_system_install.log 2>&1
+    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_system_install node && sudo apt-get clean' > $VCT_CONTAINER_DIR/vct_system_install.log 2>&1
 }
 
 function init_vct(){
@@ -82,20 +84,26 @@ function init_vct(){
 
 function build_node_vct() {
 	echo "Building node firmware..."
-    ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_build_node_base_image'
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} '/home/vct/confine-dist/utils/vct/vct_build_node_base_image 1 99' > $VCT_CONTAINER_DIR/vct_build_node_base_image.log 2>&1 && \
+	echo "VCT_NODE_TEMPLATE_URL=file:///home/vct/confine-dist/images/CONFINE-owrt-current.img.gz" >> $VCT_CONTAINER_DIR/vct/rootfs/home/vct/confine-dist/utils/vct/vct.conf.overrides
+}
+
+function build_node_vct_cleanup() {
+	echo "Cleaning node firmware Buildenvironment..."
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@${VCT_IP} 'cd /home/vct/confine-dist/ && make distclean && make mrproper'
 }
 
 function tar_xz_vct() {
 	echo "Packaging VCT lXC..."
-    cd $VCT_CONTAINER_DIR
-    #clean up
-    quilt pop -a -v -f
-    #tar
-    id=$(date +%Y%m%d_%H%M%S);
+	cd $VCT_CONTAINER_DIR
+	#clean up
+	quilt pop -a -v -f
+	#tar
+	id=$(date +%Y%m%d_%H%M%S);
 	name=vct-container,vct$VCT_HASH,controller$CONTROLLER_HASH,nodefw$NODEFIRMWARE_HASH.tar.xz
-	echo "Compressing with tar xz..."
-    tar -c --xz -f ./$name vct
-    cd -
+	echo "Compressing as $name"
+	tar -c --xz -f ./$name vct
+	cd -
 	mv $VCT_CONTAINER_DIR/$name ./dl/
 	echo $name
 }
@@ -154,7 +162,10 @@ function build_vct() {
 	#network_vct
 	install_vct
 	update_controller
-	install_node_firmware
+#	install_node_firmware
+	build_node_vct # TODO: needs to build NODEFIRMWARE_HASH, NOT VCT_HASH
+	install_vct
+	build_node_vct_cleanup # TODO: needs to cleanup build environment
 	init_vct
 	tear_down_vct_container
 	tar_xz_vct
