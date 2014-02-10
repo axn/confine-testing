@@ -10,6 +10,8 @@ RESEARCH_CONTAINER=${RESEARCH_CONTAINER:-researcher,20140122_111534.tar.xz}
 RESEARCH_CONTAINER_URL=https://media.confine-project.eu/researcher-container/$RESEARCH_CONTAINER
 CONFINE_TESTS_URL=${CONFINE_TESTS_URL:-http://git.confine-project.eu/confine/confine-tests.git}
 SETUP_ONLY=${SETUP_ONLY:-n}
+NO_SETUP=${NO_SETUP:-n}
+NO_TESTS=${NO_TESTS:-n}
 NO_TEARDOWN=${NO_TEARDOWN:-n}
 
 set -e # fail on any exception
@@ -22,25 +24,34 @@ set -e # fail on any exception
 echo "Using vct: $VCT_CONTAINER"
 echo "Using researcher: $RESEARCH_CONTAINER"
 
-configure_network
+if [ "${NO_SETUP}" != "y" ]; then
 
-start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
-start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL $CONFINE_TESTS_URL
+    configure_network
 
-configure_masquerade
-configure_vct_inet
-init_VCT
-configure_researcher_inet
+    start_vct $VCT_CONTAINER $VCT_CONTAINER_URL
+    start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL $CONFINE_TESTS_URL
+
+    configure_masquerade
+    configure_vct_inet
+    init_VCT
+    configure_researcher_inet
+fi
 
 if [ "${SETUP_ONLY}" == "y" ]; then
 	exit 0;
 fi
 
-set +e # allow failure
-run_tests
-status=$?
-set -e # fail on any exception
-echo "Tests ended with $status"
+
+if [ "${NO_TESTS}" != "y" ]; then
+
+    set +e # allow failure
+    run_tests
+    status=$?
+    set -e # fail on any exception
+    echo "Tests ended with $status"
+else
+    status=0
+fi
 
 if [ "${NO_TEARDOWN}" == "y" ]; then
 	exit $status;
