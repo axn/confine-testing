@@ -148,10 +148,10 @@ function build_vct() {
 	extract_vct
 	start_vct
 	sleep 10
+	configure_inet
 	clean_vct
 	update_vct
 	#network_vct
-	configure_inet
 	install_vct
 	update_controller
 	install_node_firmware
