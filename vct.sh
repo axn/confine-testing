@@ -48,6 +48,11 @@ function configure_vct_inet() {
 	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$VCT_IP "sudo ip addr add ${IPV4PREFIX}2/24 dev eth0 &&  sudo ip route add default via ${IPV4PREFIX}1 && sleep 5 && ping -c 5 8.8.8.8";
 }
 
+function init_VCT() { #DO NOT confuse with init_vct() from vct-container.sh!!
+	echo "Initializing VCT..."
+	ssh -i ./sshkey/id_rsa -o StrictHostKeyChecking=no vct@$VCT_IP "/home/vct/confine-dist/utils/vct/vct_system_init";
+}
+
 function archive_vct() {
     lxc-stop -n $VCT_LXC;
     id=$(date +%Y%m%d_%H%M%S);

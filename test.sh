@@ -29,6 +29,7 @@ start_researcher $RESEARCH_CONTAINER $RESEARCH_CONTAINER_URL $CONFINE_TESTS_URL
 
 configure_masquerade
 configure_vct_inet
+init_VCT
 configure_researcher_inet
 
 if [ "${SETUP_ONLY}" == "y" ]; then
